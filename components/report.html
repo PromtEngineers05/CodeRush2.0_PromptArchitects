@@ -1,60 +1,33 @@
-<section
-    class="report section"
-    id="report">
+<section class="report section" id="report">
 
     <div class="container">
 
-        <!-- ==========================================
-            HEADER
-        =========================================== -->
-
         <div class="report-header">
 
-            <div>
+            <div class="badge">
 
-                <div class="badge">
-
-                    📍 AI Complaint Registration
-
-                </div>
-
-                <h2 class="section-title">
-
-                    Report Civic Issues
-
-                    <span class="gradient-text">
-
-                        In Seconds
-
-                    </span>
-
-                </h2>
-
-                <p class="section-subtitle">
-
-                    Upload an image,
-                    describe the issue by voice,
-                    or type a complaint.
-                    CivicAI automatically understands,
-                    classifies,
-                    prioritizes,
-                    and routes the issue.
-
-                </p>
+                📍 Report Civic Issue
 
             </div>
 
-        </div>
+            <h2 class="section-title">
 
-        <!-- ==========================================
-            GRID
-        =========================================== -->
+                AI Smart Complaint Registration
+
+            </h2>
+
+            <p class="section-subtitle">
+
+                Capture an issue, upload an image, or describe it by voice.
+                CivicAI will automatically understand and process your complaint.
+
+            </p>
+
+        </div>
 
         <div class="report-grid">
 
-            <!-- ==========================================
-                 LEFT PANEL
-            =========================================== -->
+            <!-- LEFT -->
 
             <div class="report-card card">
 
@@ -68,44 +41,120 @@
 
                 </div>
 
-                <form
-                    id="report-form"
-                    class="report-form">
+                <form id="report-form">
 
-                    <div class="upload-box">
+                    <!-- CAMERA -->
 
-                        <input
-                            type="file"
-                            id="complaint-image"
-                            accept="image/*"
-                            hidden>
+                    <div class="upload-container">
 
-                        <label
-                            for="complaint-image"
-                            class="upload-area">
+                        <div
+                            class="upload-area"
+                            id="upload-area">
 
-                            <div class="upload-icon">
+                            <input
 
-                                📷
+                                type="file"
+
+                                id="complaint-image"
+
+                                accept="image/*"
+
+                                capture="environment"
+
+                                hidden>
+
+                            <div class="upload-content">
+
+                                <div class="camera-icon">
+
+                                    📷
+
+                                </div>
+
+                                <h3>
+
+                                    Capture or Upload
+
+                                </h3>
+
+                                <p>
+
+                                    Camera • Gallery • Drag & Drop
+
+                                </p>
 
                             </div>
 
-                            <h4>
+                        </div>
 
-                                Upload Image
+                    </div>
 
-                            </h4>
+                    <!-- PREVIEW -->
 
-                            <p>
+                    <div
+    id="image-preview"
+    class="image-preview">
 
-                                Drag & Drop
-                                or Click Here
+    <div
+        class="preview-wrapper">
 
-                            </p>
+        <img
+            id="preview-image"
+            alt="Complaint Preview">
+
+        <div
+            id="ai-overlay"
+            class="ai-overlay">
+
+        </div>
+
+        <div
+            id="scan-line"
+            class="scan-line">
+
+        </div>
+
+    </div>
+
+</div>
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Location
 
                         </label>
 
+                        <div class="location-row">
+
+                            <input
+
+                                type="text"
+
+                                id="location"
+
+                                placeholder="Detecting location...">
+
+                            <button
+
+                                type="button"
+
+                                id="detect-location"
+
+                                class="secondary-btn">
+
+                                📍
+
+                            </button>
+
+                        </div>
+
                     </div>
+
+                    <!-- TITLE -->
 
                     <div class="form-group">
 
@@ -119,11 +168,13 @@
 
                             type="text"
 
-                            id="complaint-title"
+                            id="title"
 
-                            placeholder="Example : Large pothole near school">
+                            placeholder="Example: Large pothole near school">
 
                     </div>
+
+                    <!-- DESCRIPTION -->
 
                     <div class="form-group">
 
@@ -135,7 +186,7 @@
 
                         <textarea
 
-                            id="complaint-description"
+                            id="description"
 
                             rows="6"
 
@@ -145,7 +196,9 @@
 
                     </div>
 
-                    <div class="form-actions">
+                    <!-- ACTIONS -->
+
+                    <div class="report-actions">
 
                         <button
 
@@ -165,7 +218,7 @@
 
                             class="primary-btn">
 
-                            Analyze With AI
+                            Analyze with AI →
 
                         </button>
 
@@ -175,9 +228,7 @@
 
             </div>
 
-            <!-- ==========================================
-                 RIGHT PANEL
-            =========================================== -->
+            <!-- RIGHT -->
 
             <div class="analysis-card card">
 
@@ -191,16 +242,40 @@
 
                     <span class="status-chip">
 
-                        Waiting
+                        Ready
 
                     </span>
 
                 </div>
 
                 <div
-                    id="analysis-container">
+id="analysis-container">
 
-                </div>
+<div class="waiting-ai">
+
+    <div class="ai-brain">
+
+        🤖
+
+    </div>
+
+    <h3>
+
+        Waiting For Image
+
+    </h3>
+
+    <p>
+
+        Upload an image and CivicAI
+        will automatically start
+        Computer Vision analysis.
+
+    </p>
+
+</div>
+
+</div>
 
             </div>
 

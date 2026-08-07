@@ -2,130 +2,134 @@
    CIVICAI DESIGN TOKENS
 ========================================================== */
 
-:root {
+:root{
 
     /* ======================================================
-       COLORS
+       BRAND COLORS
     ====================================================== */
 
-    --primary: #4F7CFF;
-    --primary-dark: #345DFF;
-    --primary-light: #6D96FF;
+    --primary:#4F7CFF;
 
-    --secondary: #00D4FF;
+    --primary-light:#7DA2FF;
 
-    --accent: #7C5CFF;
+    --primary-dark:#2859F5;
 
-    --success: #00D084;
+    --secondary:#00D4FF;
 
-    --warning: #F9B233;
+    --accent:#8B5CF6;
 
-    --danger: #FF4D6D;
+    /* ======================================================
+       STATUS
+    ====================================================== */
+
+    --success:#00D084;
+
+    --warning:#FFB347;
+
+    --danger:#FF4D6D;
+
+    --info:#38BDF8;
 
     /* ======================================================
        BACKGROUND
     ====================================================== */
 
-    --bg: #050816;
+    --bg:#070B14;
 
-    --bg-secondary: #0C1224;
+    --bg-secondary:#0D1321;
 
-    --bg-card: rgba(255,255,255,.05);
+    --surface:#121B2D;
 
-    --bg-card-hover: rgba(255,255,255,.08);
+    --surface-hover:#1A2540;
+
+    --glass:rgba(255,255,255,.05);
+
+    --glass-border:rgba(255,255,255,.08);
 
     /* ======================================================
        TEXT
     ====================================================== */
 
-    --text: #FFFFFF;
+    --text:#FFFFFF;
 
-    --text-light: #C7D1E0;
+    --text-light:#E7ECF8;
 
-    --text-muted: #7D8CA5;
+    --text-muted:#9FB1D0;
+
+    --text-disabled:#62708C;
 
     /* ======================================================
-       BORDER
+       GRADIENTS
     ====================================================== */
 
-    --border: rgba(255,255,255,.08);
+    --gradient-primary:
 
-    --border-light: rgba(255,255,255,.04);
+        linear-gradient(
+            135deg,
+            #4F7CFF,
+            #00D4FF
+        );
+
+    --gradient-hero:
+
+        linear-gradient(
+            135deg,
+            #4F7CFF 0%,
+            #8B5CF6 45%,
+            #00D4FF 100%
+        );
+
+    --gradient-success:
+
+        linear-gradient(
+            135deg,
+            #00D084,
+            #00F5A0
+        );
+
+    --gradient-danger:
+
+        linear-gradient(
+            135deg,
+            #FF4D6D,
+            #FF7B8A
+        );
 
     /* ======================================================
        GLASS
     ====================================================== */
 
-    --glass: rgba(255,255,255,.05);
+    --blur:24px;
 
-    --glass-strong: rgba(255,255,255,.08);
+    --glass-shadow:
 
-    --glass-border: rgba(255,255,255,.10);
-
-    --blur: blur(24px);
-
-    /* ======================================================
-       SHADOWS
-    ====================================================== */
+        0 12px 40px rgba(0,0,0,.28);
 
     --shadow-sm:
-        0 5px 20px rgba(0,0,0,.18);
+
+        0 5px 15px rgba(0,0,0,.18);
 
     --shadow-md:
+
         0 15px 40px rgba(0,0,0,.25);
 
     --shadow-lg:
-        0 30px 90px rgba(0,0,0,.45);
 
-    --shadow-primary:
-        0 0 80px rgba(79,124,255,.30);
-
-    --shadow-cyan:
-        0 0 80px rgba(0,212,255,.25);
+        0 30px 80px rgba(0,0,0,.35);
 
     /* ======================================================
-       TYPOGRAPHY
+       RADIUS
     ====================================================== */
 
-    --font-family:
-        "Inter",
-        sans-serif;
+    --radius-sm:10px;
 
-    --fs-xs: .75rem;
+    --radius-md:18px;
 
-    --fs-sm: .875rem;
+    --radius-lg:26px;
 
-    --fs-base: 1rem;
+    --radius-xl:34px;
 
-    --fs-lg: 1.125rem;
-
-    --fs-xl: 1.25rem;
-
-    --fs-2xl: 1.5rem;
-
-    --fs-3xl: 2rem;
-
-    --fs-4xl: 2.75rem;
-
-    --fs-5xl: 4rem;
-
-    --fs-6xl: 5rem;
-
-    /* ======================================================
-       FONT WEIGHT
-    ====================================================== */
-
-    --fw-light:300;
-
-    --fw-normal:400;
-
-    --fw-medium:500;
-
-    --fw-semibold:600;
-
-    --fw-bold:700;
-
-    --fw-black:900;
+    --radius-pill:999px;
 
     /* ======================================================
        SPACING
@@ -143,50 +147,48 @@
 
     --space-6:24px;
 
-    --space-8:32px;
+    --space-7:32px;
 
-    --space-10:40px;
+    --space-8:40px;
 
-    --space-12:48px;
+    --space-9:56px;
 
-    --space-16:64px;
-
-    --space-20:80px;
-
-    --space-24:96px;
-
-    --space-32:128px;
+    --space-10:72px;
 
     /* ======================================================
-       RADIUS
-    ====================================================== */
-
-    --radius-xs:8px;
-
-    --radius-sm:12px;
-
-    --radius-md:18px;
-
-    --radius-lg:24px;
-
-    --radius-xl:32px;
-
-    --radius-pill:999px;
-
-    /* ======================================================
-       CONTAINER
+       LAYOUT
     ====================================================== */
 
     --container:1400px;
 
+    --navbar-height:90px;
+
+    --section-space:140px;
+
     /* ======================================================
-       TRANSITIONS
+       ANIMATION
     ====================================================== */
 
-    --transition-fast:.2s ease;
+    --transition:
 
-    --transition:.35s ease;
+        .35s cubic-bezier(.4,0,.2,1);
 
-    --transition-slow:.6s cubic-bezier(.22,1,.36,1);
+    --transition-slow:
+
+        .6s cubic-bezier(.4,0,.2,1);
+
+    /* ======================================================
+       Z INDEX
+    ====================================================== */
+
+    --z-loader:99999;
+
+    --z-modal:9990;
+
+    --z-navbar:1000;
+
+    --z-dropdown:900;
+
+    --z-overlay:800;
 
 }

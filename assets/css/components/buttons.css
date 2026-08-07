@@ -1,25 +1,8 @@
 /* ==========================================================
-   CIVICAI BUTTON SYSTEM
-   Version : 1.0
+   BUTTON SYSTEM
 ========================================================== */
 
-/* ==========================================================
-   BASE BUTTON
-========================================================== */
-
-.btn{
-
-    position:relative;
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:16px 34px;
+button{
 
     border:none;
 
@@ -27,41 +10,16 @@
 
     cursor:pointer;
 
-    overflow:hidden;
+    font:inherit;
 
-    user-select:none;
-
-    white-space:nowrap;
-
-    text-decoration:none;
-
-    font-family:var(--font-family);
-
-    font-size:.96rem;
-
-    font-weight:700;
-
-    border-radius:999px;
-
-    transition:
-
-        transform .35s ease,
-
-        background .35s ease,
-
-        color .35s ease,
-
-        box-shadow .35s ease,
-
-        border-color .35s ease;
+    transition:var(--transition);
 
 }
 
-/* ==========================================================
-   PRIMARY BUTTON
-========================================================== */
-
-.primary-btn{
+.primary-btn,
+.secondary-btn,
+.outline-btn,
+.ghost-btn{
 
     position:relative;
 
@@ -73,67 +31,34 @@
 
     gap:12px;
 
-    padding:16px 34px;
+    min-height:58px;
 
-    border-radius:999px;
+    padding:0 28px;
 
-    overflow:hidden;
+    border-radius:var(--radius-pill);
 
-    color:#fff;
+    font-size:1rem;
 
     font-weight:700;
 
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        var(--primary),
-
-        var(--secondary)
-
-    );
-
-    box-shadow:
-
-        0 18px 40px rgba(79,124,255,.30);
+    overflow:hidden;
 
     transition:var(--transition);
 
 }
+/* ==========================================================
+   PRIMARY
+========================================================== */
 
-/* Shine */
+.primary-btn{
 
-.primary-btn::before{
+    color:#fff;
 
-    content:"";
+    background:var(--gradient-primary);
 
-    position:absolute;
+    box-shadow:
 
-    top:0;
-
-    left:-120%;
-
-    width:100%;
-
-    height:100%;
-
-    background:
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        rgba(255,255,255,.45),
-
-        transparent
-
-    );
-
-    transition:1s;
+        0 15px 35px rgba(79,124,255,.35);
 
 }
 
@@ -141,19 +66,11 @@
 
     transform:
 
-        translateY(-5px)
-
-        scale(1.02);
+        translateY(-3px);
 
     box-shadow:
 
-        0 25px 60px rgba(79,124,255,.45);
-
-}
-
-.primary-btn:hover::before{
-
-    left:130%;
+        0 20px 45px rgba(79,124,255,.45);
 
 }
 
@@ -162,30 +79,13 @@
     transform:scale(.97);
 
 }
-
 /* ==========================================================
-   SECONDARY BUTTON
+   SECONDARY
 ========================================================== */
 
 .secondary-btn{
 
-    position:relative;
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:16px 34px;
-
-    border-radius:999px;
-
-    color:#fff;
-
-    font-weight:700;
+    color:var(--text-light);
 
     background:
 
@@ -203,115 +103,72 @@
 
         blur(20px);
 
-    transition:var(--transition);
-
 }
 
 .secondary-btn:hover{
-
-    transform:
-
-        translateY(-5px);
 
     background:
 
         rgba(255,255,255,.08);
 
-    border-color:
+    transform:
 
-        rgba(255,255,255,.20);
+        translateY(-3px);
 
 }
-
 /* ==========================================================
-   GLASS BUTTON
-========================================================== */
-
-.glass-btn{
-
-    position:relative;
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:16px 34px;
-
-    border-radius:999px;
-
-    background:
-
-        rgba(255,255,255,.06);
-
-    border:
-
-        1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:
-
-        blur(30px);
-
-    color:#fff;
-
-    transition:var(--transition);
-
-}
-
-.glass-btn:hover{
-
-    background:
-
-        rgba(255,255,255,.12);
-
-}
-
-/* ==========================================================
-   OUTLINE BUTTON
+   OUTLINE
 ========================================================== */
 
 .outline-btn{
 
-    display:inline-flex;
+    background:transparent;
 
-    justify-content:center;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:16px 34px;
-
-    border-radius:999px;
+    color:var(--primary);
 
     border:
 
         2px solid var(--primary);
 
-    color:#fff;
-
-    transition:var(--transition);
-
 }
 
 .outline-btn:hover{
 
-    background:var(--primary);
+    background:
+
+        rgba(79,124,255,.10);
+
+}
+/* ==========================================================
+   GHOST
+========================================================== */
+
+.ghost-btn{
+
+    background:transparent;
+
+    color:var(--text-light);
 
 }
 
+.ghost-btn:hover{
+
+    background:
+
+        rgba(255,255,255,.05);
+
+}
 /* ==========================================================
    ICON BUTTON
 ========================================================== */
 
 .icon-btn{
 
-    width:58px;
+    width:56px;
 
-    height:58px;
+    height:56px;
+
+    border-radius:50%;
 
     display:flex;
 
@@ -319,19 +176,13 @@
 
     align-items:center;
 
-    border-radius:50%;
-
     background:
 
-        rgba(255,255,255,.06);
+        rgba(255,255,255,.05);
 
     border:
 
         1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:
-
-        blur(20px);
 
     transition:var(--transition);
 
@@ -341,125 +192,138 @@
 
     transform:
 
-        translateY(-5px)
+        translateY(-3px);
 
-        rotate(8deg);
+    background:
+
+        rgba(79,124,255,.10);
 
 }
-
 /* ==========================================================
-   BUTTON SIZES
+   FLOATING BUTTON
 ========================================================== */
 
-.btn-sm{
+.fab{
 
-    padding:12px 24px;
+    position:fixed;
 
-    font-size:.85rem;
+    right:30px;
+
+    bottom:30px;
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+    background:var(--gradient-primary);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+    z-index:999;
 
 }
 
-.btn-lg{
+.fab:hover{
 
-    padding:20px 40px;
+    transform:
 
-    font-size:1.05rem;
+        scale(1.08);
 
-}
+    }
 
 /* ==========================================================
-   FULL WIDTH
+   RIPPLE EFFECT
 ========================================================== */
 
-.btn-block{
+.primary-btn::after,
+.secondary-btn::after{
 
-    width:100%;
+    content:"";
+
+    position:absolute;
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    background:
+
+        rgba(255,255,255,.35);
+
+    transform:scale(0);
+
+    opacity:0;
 
 }
 
+.primary-btn:active::after,
+.secondary-btn:active::after{
+
+    animation:
+
+        ripple .6s ease;
+
+}
+
+@keyframes ripple{
+
+    from{
+
+        transform:scale(0);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:scale(16);
+
+        opacity:0;
+
+    }
+
+}
 /* ==========================================================
    DISABLED
 ========================================================== */
 
-.btn:disabled,
+button:disabled{
 
-.primary-btn:disabled,
-
-.secondary-btn:disabled{
-
-    opacity:.5;
+    opacity:.6;
 
     cursor:not-allowed;
 
-    pointer-events:none;
+    transform:none !important;
 
 }
 
 /* ==========================================================
-   LOADING
-========================================================== */
-
-.btn-loading{
-
-    pointer-events:none;
-
-    opacity:.75;
-
-}
-
-.btn-loading::after{
-
-    content:"";
-
-    width:18px;
-
-    height:18px;
-
-    border-radius:50%;
-
-    border:
-
-        2px solid rgba(255,255,255,.35);
-
-    border-top-color:#fff;
-
-    animation:rotate .8s linear infinite;
-
-}
-
-/* ==========================================================
-   FOCUS
-========================================================== */
-
-.btn:focus-visible,
-
-.primary-btn:focus-visible,
-
-.secondary-btn:focus-visible{
-
-    outline:2px solid var(--secondary);
-
-    outline-offset:4px;
-
-}
-
-/* ==========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================== */
 
 @media(max-width:768px){
 
     .primary-btn,
-
     .secondary-btn,
-
-    .glass-btn,
-
-    .outline-btn{
+    .outline-btn,
+    .ghost-btn{
 
         width:100%;
-
-        justify-content:center;
 
     }
 

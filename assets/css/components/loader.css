@@ -1,0 +1,89 @@
+/* ==========================================================
+   LOADER
+========================================================== */
+
+.loader{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:var(--bg);
+
+    z-index:99999;
+
+}
+
+.loader-logo{
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    margin-bottom:40px;
+
+    background:var(--gradient-hero);
+
+    background-clip:text;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+.loader-bar{
+
+    width:340px;
+
+    height:8px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    background:
+
+        rgba(255,255,255,.08);
+
+}
+
+.loader-progress{
+
+    width:0;
+
+    height:100%;
+
+    background:var(--gradient-primary);
+
+    transition:.15s;
+
+}
+
+.loader-status{
+
+    margin-top:25px;
+
+    color:var(--text-muted);
+
+}
+
+.loader-hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.8s;
+
+}

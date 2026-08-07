@@ -1,6 +1,5 @@
 /* ==========================================================
-   CIVICAI UTILITIES
-   Version : 1.0
+   GLOBAL UTILITIES
 ========================================================== */
 
 /* ==========================================================
@@ -9,23 +8,7 @@
 
 .container{
 
-    width:min(92%, var(--container));
-
-    margin-inline:auto;
-
-}
-
-.container-sm{
-
-    width:min(90%, 900px);
-
-    margin-inline:auto;
-
-}
-
-.container-lg{
-
-    width:min(96%, 1600px);
+    width:min(100% - 48px,var(--container));
 
     margin-inline:auto;
 
@@ -39,139 +22,7 @@
 
     position:relative;
 
-    padding:120px 0;
-
-}
-
-.section-sm{
-
-    padding:80px 0;
-
-}
-
-.section-lg{
-
-    padding:180px 0;
-
-}
-
-/* ==========================================================
-   DISPLAY
-========================================================== */
-
-.d-none{
-
-    display:none;
-
-}
-
-.d-block{
-
-    display:block;
-
-}
-
-.d-inline{
-
-    display:inline;
-
-}
-
-.d-inline-block{
-
-    display:inline-block;
-
-}
-
-.d-flex{
-
-    display:flex;
-
-}
-
-.d-grid{
-
-    display:grid;
-
-}
-
-/* ==========================================================
-   FLEX
-========================================================== */
-
-.flex{
-
-    display:flex;
-
-}
-
-.flex-column{
-
-    flex-direction:column;
-
-}
-
-.flex-wrap{
-
-    flex-wrap:wrap;
-
-}
-
-.flex-center{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.justify-start{
-
-    justify-content:flex-start;
-
-}
-
-.justify-center{
-
-    justify-content:center;
-
-}
-
-.justify-between{
-
-    justify-content:space-between;
-
-}
-
-.justify-around{
-
-    justify-content:space-around;
-
-}
-
-.justify-evenly{
-
-    justify-content:space-evenly;
-
-}
-
-.align-start{
-
-    align-items:flex-start;
-
-}
-
-.align-center{
-
-    align-items:center;
-
-}
-
-.align-end{
-
-    align-items:flex-end;
+    padding:var(--section-space) 0;
 
 }
 
@@ -191,6 +42,8 @@
 
     grid-template-columns:repeat(2,1fr);
 
+    gap:32px;
+
 }
 
 .grid-3{
@@ -198,6 +51,8 @@
     display:grid;
 
     grid-template-columns:repeat(3,1fr);
+
+    gap:32px;
 
 }
 
@@ -207,119 +62,61 @@
 
     grid-template-columns:repeat(4,1fr);
 
-}
-
-.grid-auto{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(auto-fit,minmax(300px,1fr));
-
-}
-
-.gap-1{
-
-    gap:8px;
-
-}
-
-.gap-2{
-
-    gap:16px;
-
-}
-
-.gap-3{
-
     gap:24px;
 
 }
 
-.gap-4{
+/* ==========================================================
+   FLEX
+========================================================== */
 
-    gap:32px;
+.flex{
 
-}
-
-.gap-5{
-
-    gap:48px;
+    display:flex;
 
 }
 
-.gap-6{
+.flex-center{
 
-    gap:64px;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.flex-column{
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
 /* ==========================================================
-   WIDTH
+   GAP
 ========================================================== */
 
-.w-100{
+.gap-1{gap:8px;}
 
-    width:100%;
+.gap-2{gap:16px;}
 
-}
+.gap-3{gap:24px;}
 
-.h-100{
+.gap-4{gap:32px;}
 
-    height:100%;
-
-}
-
-.min-vh{
-
-    min-height:100vh;
-
-}
-
-/* ==========================================================
-   POSITION
-========================================================== */
-
-.relative{
-
-    position:relative;
-
-}
-
-.absolute{
-
-    position:absolute;
-
-}
-
-.fixed{
-
-    position:fixed;
-
-}
-
-.sticky{
-
-    position:sticky;
-
-}
-
-/* ==========================================================
-   OVERFLOW
-========================================================== */
-
-.overflow-hidden{
-
-    overflow:hidden;
-
-}
-
-.overflow-auto{
-
-    overflow:auto;
-
-}
+.gap-5{gap:48px;}
 
 /* ==========================================================
    GLASS
@@ -331,191 +128,205 @@
 
     border:1px solid var(--glass-border);
 
-    backdrop-filter:var(--blur);
+    backdrop-filter:blur(var(--blur));
 
-    -webkit-backdrop-filter:var(--blur);
+    -webkit-backdrop-filter:blur(var(--blur));
 
-}
-
-.glass-strong{
-
-    background:var(--glass-strong);
-
-    border:1px solid rgba(255,255,255,.12);
-
-    backdrop-filter:blur(30px);
-
-    -webkit-backdrop-filter:blur(30px);
+    box-shadow:var(--glass-shadow);
 
 }
 
 /* ==========================================================
-   RADIUS
+   CARD
 ========================================================== */
 
-.radius-xs{
+.card{
 
-    border-radius:var(--radius-xs);
+    position:relative;
 
-}
+    overflow:hidden;
 
-.radius-sm{
-
-    border-radius:var(--radius-sm);
-
-}
-
-.radius-md{
-
-    border-radius:var(--radius-md);
-
-}
-
-.radius-lg{
+    padding:32px;
 
     border-radius:var(--radius-lg);
 
-}
+    background:var(--glass);
 
-.radius-xl{
+    border:1px solid var(--glass-border);
 
-    border-radius:var(--radius-xl);
+    backdrop-filter:blur(var(--blur));
 
-}
-
-.radius-pill{
-
-    border-radius:999px;
-
-}
-
-/* ==========================================================
-   SHADOW
-========================================================== */
-
-.shadow-sm{
-
-    box-shadow:var(--shadow-sm);
-
-}
-
-.shadow-md{
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.shadow-lg{
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-.shadow-primary{
-
-    box-shadow:var(--shadow-primary);
-
-}
-
-/* ==========================================================
-   SPACING
-========================================================== */
-
-.mt-1{margin-top:8px;}
-.mt-2{margin-top:16px;}
-.mt-3{margin-top:24px;}
-.mt-4{margin-top:32px;}
-.mt-5{margin-top:48px;}
-.mt-6{margin-top:64px;}
-
-.mb-1{margin-bottom:8px;}
-.mb-2{margin-bottom:16px;}
-.mb-3{margin-bottom:24px;}
-.mb-4{margin-bottom:32px;}
-.mb-5{margin-bottom:48px;}
-.mb-6{margin-bottom:64px;}
-
-.pt-1{padding-top:8px;}
-.pt-2{padding-top:16px;}
-.pt-3{padding-top:24px;}
-.pt-4{padding-top:32px;}
-.pt-5{padding-top:48px;}
-.pt-6{padding-top:64px;}
-
-.pb-1{padding-bottom:8px;}
-.pb-2{padding-bottom:16px;}
-.pb-3{padding-bottom:24px;}
-.pb-4{padding-bottom:32px;}
-.pb-5{padding-bottom:48px;}
-.pb-6{padding-bottom:64px;}
-
-.p-1{padding:8px;}
-.p-2{padding:16px;}
-.p-3{padding:24px;}
-.p-4{padding:32px;}
-.p-5{padding:48px;}
-.p-6{padding:64px;}
-
-/* ==========================================================
-   CURSOR
-========================================================== */
-
-.pointer{
-
-    cursor:pointer;
-
-}
-
-/* ==========================================================
-   TRANSITIONS
-========================================================== */
-
-.transition{
+    -webkit-backdrop-filter:blur(var(--blur));
 
     transition:var(--transition);
 
 }
 
-.transition-fast{
+.card:hover{
 
-    transition:var(--transition-fast);
+    transform:translateY(-8px);
 
-}
+    border-color:
 
-.transition-slow{
+        rgba(79,124,255,.25);
 
-    transition:var(--transition-slow);
+    box-shadow:
+
+        var(--shadow-lg);
 
 }
 
 /* ==========================================================
-   Z INDEX
+   BADGE
 ========================================================== */
 
-.z-1{
+.badge{
 
-    z-index:1;
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(79,124,255,.10);
+
+    color:var(--primary-light);
+
+    border:
+
+        1px solid rgba(79,124,255,.18);
+
+    font-size:.92rem;
+
+    font-weight:600;
 
 }
 
-.z-10{
+/* ==========================================================
+   STATUS CHIP
+========================================================== */
 
-    z-index:10;
+.status-chip{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:
+
+        rgba(0,208,132,.10);
+
+    color:var(--success);
+
+    border:
+
+        1px solid rgba(0,208,132,.20);
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+}
+/* ==========================================================
+   PANEL
+========================================================== */
+
+.panel-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 32px;
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
 
 }
 
-.z-100{
+.panel-header h3{
 
-    z-index:100;
+    font-size:1.2rem;
 
-}
-
-.z-1000{
-
-    z-index:1000;
+    font-weight:700;
 
 }
 
+/* ==========================================================
+   GRADIENT TEXT
+========================================================== */
+
+.gradient-text{
+
+    background:var(--gradient-hero);
+
+    background-clip:text;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    -webkit-text-fill-color:transparent;
+
+}
+/* ==========================================================
+   MARGIN
+========================================================== */
+
+.mt-1{margin-top:8px;}
+
+.mt-2{margin-top:16px;}
+
+.mt-3{margin-top:24px;}
+
+.mt-4{margin-top:32px;}
+
+.mt-5{margin-top:48px;}
+
+.mb-1{margin-bottom:8px;}
+
+.mb-2{margin-bottom:16px;}
+
+.mb-3{margin-bottom:24px;}
+
+.mb-4{margin-bottom:32px;}
+
+.mb-5{margin-bottom:48px;}
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
@@ -532,11 +343,7 @@
 
 @media(max-width:992px){
 
-    .grid-3{
-
-        grid-template-columns:1fr;
-
-    }
+    .grid-3,
 
     .grid-2{
 
@@ -550,23 +357,25 @@
 
     .container{
 
-        width:94%;
+        width:min(100% - 24px,var(--container));
 
     }
 
     .section{
 
-        padding:90px 0;
+        padding:100px 0;
 
     }
 
-}
+    .panel-header{
 
-@media(max-width:576px){
+        padding:20px;
 
-    .grid-4{
+    }
 
-        grid-template-columns:1fr;
+    .card{
+
+        padding:22px;
 
     }
 

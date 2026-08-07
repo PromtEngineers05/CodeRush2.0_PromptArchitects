@@ -2,33 +2,189 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    await loadComponent("navbar", "./components/navbar.html");
+    try {
 
-    await loadComponent("hero", "./components/hero.html");
+        await loadAllComponents();
 
-    await loadComponent("features", "./components/features.html");
+        initializeApplication();
 
-    await loadComponent("platform", "./components/platform.html");
+        if (window.CivicUtils) {
 
-    await loadComponent("dashboard", "./components/dashboard.html");
+            CivicUtils.toast(
+                "CivicAI Ready",
+                "success"
+            );
 
-    await loadComponent("footer", "./components/footer.html");
+        }
 
-    document.getElementById("loader").style.display = "none";
+        if (window.CivicAnimations) {
 
-});
-async function loadComponent(id, path){
+            CivicAnimations.reveal();
 
-    const response = await fetch(path);
+            CivicAnimations.counters();
 
-    if(!response.ok){
+        }
 
-        throw new Error(`Cannot load ${path}`);
+        if (window.CivicEvents) {
+
+            CivicEvents.emit(
+                "application_ready"
+            );
+
+        }
+
+        if (window.CivicConstants) {
+
+            console.log(
+                `${CivicConstants.APP_NAME} v${CivicConstants.VERSION}`
+            );
+
+        }
 
     }
 
-    const html = await response.text();
+    catch (error) {
 
-    document.getElementById(id).innerHTML = html;
+        console.error(
+            "Application Initialization Failed:",
+            error
+        );
+
+    }
+
+    finally {
+
+        const loader = document.getElementById("loader");
+
+        if (loader) {
+
+            loader.style.display = "none";
+
+        }
+
+    }
+
+});
+
+/* ==========================================================
+   COMPONENTS
+========================================================== */
+
+async function loadAllComponents() {
+
+    const components = [
+
+        {
+            id: "navbar",
+            path: "./components/navbar.html"
+        },
+
+        {
+            id: "hero",
+            path: "./components/hero.html"
+        },
+
+        {
+            id: "report",
+            path: "./components/report.html"
+        },
+
+        {
+            id: "features",
+            path: "./components/features.html"
+        },
+
+        {
+            id: "platform",
+            path: "./components/platform.html"
+        },
+
+        {
+            id: "mission-control",
+            path: "./components/mission-control.html"
+        },
+
+        {
+            id: "dashboard",
+            path: "./components/dashboard.html"
+        },
+
+        {
+            id: "map",
+            path: "./components/map.html"
+        },
+
+        {
+            id: "officer-dashboard",
+            path: "./components/officer-dashboard.html"
+        },
+
+        {
+            id: "footer",
+            path: "./components/footer.html"
+        }
+
+    ];
+
+    for (const component of components) {
+
+        await loadComponent(
+
+            component.id,
+
+            component.path
+
+        );
+
+    }
+
+}
+
+/* ==========================================================
+   LOAD COMPONENT
+========================================================== */
+
+async function loadComponent(id, path) {
+
+    try {
+
+        const container = document.getElementById(id);
+
+        if (!container) {
+
+            console.warn(`Container #${id} not found.`);
+
+            return;
+
+        }
+
+        const response = await fetch(path);
+
+        if (!response.ok) {
+
+            throw new Error(`Unable to load ${path}`);
+
+        }
+
+        container.innerHTML = await response.text();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+/* ==========================================================
+   APPLICATION
+========================================================== */
+
+function initializeApplication() {
+
+    console.log("%cCivicAI Loaded Successfully",
+        "color:#4F7CFF;font-size:16px;font-weight:bold;");
 
 }

@@ -52,10 +52,11 @@
 
     align-items:center;
 
-    gap:14px;
+    gap:12px;
+
+    text-decoration:none;
 
 }
-
 .logo-icon{
 
     width:54px;
@@ -121,7 +122,33 @@
     color:var(--text-muted);
 
 }
+.logo-image{
 
+    width:50px;
+
+    height:50px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:2px solid rgba(79,124,255,.25);
+
+    /* box-shadow:
+        0 8px 20px rgba(79,124,255,.35); */
+
+    transition:all .35s ease;
+
+}
+
+.logo:hover .logo-image{
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 12px 30px rgba(79,124,255,.5);
+
+}
 /* ==========================================
    NAVIGATION
 ========================================== */
@@ -522,5 +549,58 @@
         width:100%;
 
     }
+
+}
+/* ==========================================================
+   SCROLLED
+========================================================== */
+
+.navbar-scrolled{
+
+    background:
+
+        rgba(7,11,20,.82);
+
+    backdrop-filter:
+
+        blur(24px);
+
+    -webkit-backdrop-filter:
+
+        blur(24px);
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.28);
+
+}
+
+/* ==========================================================
+   ACTIVE
+========================================================== */
+
+.nav-link.active{
+
+    color:var(--primary);
+
+}
+
+.nav-link.active::after{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+.nav-menu.open{
+
+    display:flex;
 
 }

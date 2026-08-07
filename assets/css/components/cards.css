@@ -1,10 +1,5 @@
 /* ==========================================================
-   CIVICAI CARD SYSTEM
-   Version : 1.0
-========================================================== */
-
-/* ==========================================================
-   BASE CARD
+   CARD SYSTEM
 ========================================================== */
 
 .card{
@@ -17,31 +12,21 @@
 
     flex-direction:column;
 
-    background:rgba(255,255,255,.05);
+    border-radius:var(--radius-lg);
 
-    border:1px solid rgba(255,255,255,.08);
+    background:var(--glass);
 
-    border-radius:28px;
+    border:1px solid var(--glass-border);
 
-    backdrop-filter:blur(24px);
+    backdrop-filter:blur(var(--blur));
 
-    -webkit-backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(var(--blur));
 
-    transition:
+    box-shadow:var(--glass-shadow);
 
-        transform .45s cubic-bezier(.22,1,.36,1),
-
-        border-color .35s,
-
-        box-shadow .35s,
-
-        background .35s;
+    transition:var(--transition);
 
 }
-
-/* ==========================================================
-   BORDER GLOW
-========================================================== */
 
 .card::before{
 
@@ -51,34 +36,219 @@
 
     inset:0;
 
-    border-radius:inherit;
+    background:
 
-    border:1px solid rgba(79,124,255,.18);
+        linear-gradient(
+
+            135deg,
+
+            rgba(79,124,255,.08),
+
+            transparent,
+
+            rgba(0,212,255,.05)
+
+        );
 
     opacity:0;
 
-    transition:.45s;
+    transition:var(--transition);
 
-    pointer-events:none;
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:
+
+        rgba(79,124,255,.22);
+
+    box-shadow:
+
+        var(--shadow-lg);
+
+}
+
+.card:hover::before{
+
+    opacity:1;
 
 }
 /* ==========================================================
-   TOP LIGHT
+   CARD HEADER
 ========================================================== */
 
-.card::after{
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 30px;
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+.card-title{
+
+    font-size:1.2rem;
+
+    font-weight:700;
+
+}
+
+.card-subtitle{
+
+    color:var(--text-muted);
+
+    font-size:.92rem;
+
+}
+/* ==========================================================
+   CARD BODY
+========================================================== */
+
+.card-body{
+
+    flex:1;
+
+    padding:30px;
+
+}
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:24px 30px;
+
+    border-top:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+/* ==========================================================
+   STAT CARD
+========================================================== */
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    background:var(--glass);
+
+    border:1px solid var(--glass-border);
+
+    transition:var(--transition);
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.stat-number{
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1;
+
+    margin:18px 0;
+
+}
+
+.stat-label{
+
+    color:var(--text-muted);
+
+    font-size:.95rem;
+
+}
+
+.stat-icon{
+
+    width:70px;
+
+    height:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:18px;
+
+    font-size:2rem;
+
+    background:var(--gradient-primary);
+
+}
+/* ==========================================================
+   AI CARD
+========================================================== */
+
+.ai-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:32px;
+
+    border-radius:28px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(79,124,255,.08),
+
+            rgba(139,92,246,.06)
+
+        );
+
+    border:
+
+        1px solid rgba(79,124,255,.18);
+
+}
+
+.ai-card::after{
 
     content:"";
 
     position:absolute;
 
-    top:-140px;
+    top:-120px;
 
-    right:-140px;
+    right:-120px;
 
-    width:260px;
+    width:220px;
 
-    height:260px;
+    height:220px;
 
     border-radius:50%;
 
@@ -88,169 +258,24 @@
 
             circle,
 
-            rgba(79,124,255,.18),
+            rgba(79,124,255,.22),
 
-            transparent 70%
-
-        );
-
-    filter:blur(40px);
-
-    opacity:.6;
-
-    pointer-events:none;
-
-}
-
-/* ==========================================================
-   HOVER
-========================================================== */
-
-.card:hover{
-
-    transform:
-
-        translateY(-10px);
-
-    border-color:
-
-        rgba(255,255,255,.15);
-
-    background:
-
-        rgba(255,255,255,.07);
-
-    box-shadow:
-
-        0 25px 70px rgba(0,0,0,.35),
-
-        0 0 60px rgba(79,124,255,.15);
-
-}
-
-.card:hover::before{
-
-    opacity:1;
-
-}
-
-/* ==========================================================
-   HEADER
-========================================================== */
-
-.card-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:28px 28px 0;
-
-}
-
-/* ==========================================================
-   BODY
-========================================================== */
-
-.card-body{
-
-    padding:28px;
-
-    flex:1;
-
-}
-
-/* ==========================================================
-   FOOTER
-========================================================== */
-
-.card-footer{
-
-    padding:0 28px 28px;
-
-}
-
-/* ==========================================================
-   ICON
-========================================================== */
-
-.card-icon{
-
-    width:72px;
-
-    height:72px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:22px;
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            var(--primary),
-
-            var(--secondary)
+            transparent
 
         );
 
-    color:#fff;
-
-    font-size:1.6rem;
-
-    box-shadow:
-
-        0 20px 45px rgba(79,124,255,.35);
-
 }
-
 /* ==========================================================
-   TITLE
+   DASHBOARD CARD
 ========================================================== */
 
-.card-title{
+.dashboard-card{
 
-    margin-top:24px;
+    min-height:220px;
 
-    margin-bottom:16px;
+    padding:30px;
 
-    font-size:1.45rem;
-
-    font-weight:800;
-
-}
-
-/* ==========================================================
-   DESCRIPTION
-========================================================== */
-
-.card-description{
-
-    color:var(--text-light);
-
-    line-height:1.8;
-
-    font-size:1rem;
-
-}
-
-/* ==========================================================
-   GLASS CARD
-========================================================== */
-
-.glass-card{
-
-    position:relative;
-
-    overflow:hidden;
+    border-radius:24px;
 
     background:
 
@@ -260,123 +285,85 @@
 
         1px solid rgba(255,255,255,.08);
 
-    border-radius:30px;
-
-    backdrop-filter:blur(28px);
-
-    -webkit-backdrop-filter:blur(28px);
+    transition:var(--transition);
 
 }
 
+.dashboard-card:hover{
+
+    border-color:
+
+        rgba(79,124,255,.25);
+
+}
 /* ==========================================================
-   FEATURE CARD
+   LOADING SHIMMER
 ========================================================== */
 
-.feature-card{
+.skeleton{
 
     position:relative;
 
     overflow:hidden;
 
-    padding:36px;
-
-    border-radius:30px;
-
     background:
 
-        rgba(255,255,255,.04);
-
-    border:
-
-        1px solid rgba(255,255,255,.08);
-
-    transition:var(--transition);
+        rgba(255,255,255,.05);
 
 }
 
-.feature-card:hover{
-
-    transform:
-
-        translateY(-12px);
-
-    background:
-
-        rgba(255,255,255,.07);
-
-}
-
-/* ==========================================================
-   METRIC CARD
-========================================================== */
-
-.metric-card{
-
-    padding:24px;
-
-    border-radius:24px;
-
-    background:
-
-        rgba(255,255,255,.04);
-
-    border:
-
-        1px solid rgba(255,255,255,.06);
-
-}
-
-.metric-card h2{
-
-    margin-top:12px;
-
-    font-size:2.2rem;
-
-    font-weight:900;
-
-}
-
-.metric-card span{
-
-    color:var(--text-muted);
-
-}
-
-/* ==========================================================
-   STATUS CHIP
-========================================================== */
-
-.status-chip{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    background:
-
-        rgba(0,208,132,.12);
-
-    color:var(--success);
-
-    font-size:.82rem;
-
-    font-weight:700;
-
-}
-
-.status-chip::before{
+.skeleton::after{
 
     content:"";
 
-    width:10px;
+    position:absolute;
 
-    height:10px;
+    inset:0;
+
+    transform:
+
+        translateX(-100%);
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.12),
+
+            transparent
+
+        );
+
+    animation:
+
+        shimmer 1.6s infinite;
+
+}
+
+@keyframes shimmer{
+
+    to{
+
+        transform:
+
+            translateX(100%);
+
+    }
+
+}
+/* ==========================================================
+   STATUS DOT
+========================================================== */
+
+.status-dot{
+
+    width:12px;
+
+    height:12px;
 
     border-radius:50%;
 
@@ -384,41 +371,54 @@
 
     box-shadow:
 
-        0 0 15px var(--success);
+        0 0 12px rgba(0,208,132,.6);
 
 }
 
+.status-dot.warning{
+
+    background:var(--warning);
+
+}
+
+.status-dot.danger{
+
+    background:var(--danger);
+
+}
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
-@media(max-width:768px){
+@media(max-width:992px){
 
-    .card-body{
+    .stat-number{
 
-        padding:22px;
+        font-size:2.5rem;
 
     }
+
+}
+
+@media(max-width:768px){
+
+    .card-header,
+
+    .card-body,
 
     .card-footer{
 
-        padding:0 22px 22px;
+        padding:20px;
 
     }
 
-    .feature-card{
+    .stat-card,
 
-        padding:28px;
+    .dashboard-card,
 
-    }
+    .ai-card{
 
-    .card-icon{
-
-        width:60px;
-
-        height:60px;
-
-        font-size:1.35rem;
+        padding:22px;
 
     }
 

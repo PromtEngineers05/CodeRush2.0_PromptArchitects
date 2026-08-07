@@ -1,86 +1,153 @@
 "use strict";
 
 /* ==========================================================
-   NAVBAR
+   CIVICAI NAVBAR
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
 
-    const navbar = document.querySelector(".navbar");
+    "DOMContentLoaded",
 
-    const menuToggle = document.getElementById("menu-toggle");
+    ()=>{
 
-    const navLinks = document.querySelector(".nav-links");
+        initializeNavbar();
 
-    const links = document.querySelectorAll(".nav-link");
+        initializeSmoothScroll();
 
-    /* ==========================================
-       STICKY NAVBAR
-    ========================================== */
-
-    function navbarScroll(){
-
-        if(window.scrollY > 80){
-
-            navbar.classList.add("scrolled");
-
-        }
-
-        else{
-
-            navbar.classList.remove("scrolled");
-
-        }
+        initializeScrollSpy();
 
     }
 
-    navbarScroll();
+);
+
+/* ==========================================================
+   ELEMENTS
+========================================================== */
+
+const navbar =
+
+document.querySelector(
+
+    ".navbar"
+
+);
+
+const navLinks =
+
+document.querySelectorAll(
+
+    '.nav-link'
+
+);
+
+const menuButton =
+
+document.querySelector(
+
+    ".menu-toggle"
+
+);
+
+const mobileMenu =
+
+document.querySelector(
+
+    ".nav-menu"
+
+);
+
+/* ==========================================================
+   NAVBAR
+========================================================== */
+
+function initializeNavbar(){
 
     window.addEventListener(
 
         "scroll",
 
-        navbarScroll
-
-    );
-
-    /* ==========================================
-       MOBILE MENU
-    ========================================== */
-
-    menuToggle.addEventListener(
-
-        "click",
-
         ()=>{
 
-            menuToggle.classList.toggle("active");
+            if(!navbar) return;
 
-            navLinks.classList.toggle("active");
+            if(window.scrollY>60){
 
-            document.body.classList.toggle("menu-open");
+                navbar.classList.add(
+
+                    "navbar-scrolled"
+
+                );
+
+            }
+
+            else{
+
+                navbar.classList.remove(
+
+                    "navbar-scrolled"
+
+                );
+
+            }
 
         }
 
     );
 
-    /* ==========================================
-       CLOSE MENU
-    ========================================== */
+}
+/* ==========================================================
+   SMOOTH SCROLL
+========================================================== */
 
-    links.forEach(link=>{
+function initializeSmoothScroll(){
+
+    navLinks.forEach(link=>{
 
         link.addEventListener(
 
             "click",
 
-            ()=>{
+            event=>{
 
-                menuToggle.classList.remove("active");
+                const target=
 
-                navLinks.classList.remove("active");
+                link.getAttribute(
 
-                document.body.classList.remove("menu-open");
+                    "href"
+
+                );
+
+                if(
+
+                    !target ||
+
+                    !target.startsWith("#")
+
+                ){
+
+                    return;
+
+                }
+
+                event.preventDefault();
+
+                document.querySelector(
+
+                    target
+
+                )?.scrollIntoView({
+
+                    behavior:"smooth",
+
+                    block:"start"
+
+                });
+
+                mobileMenu?.classList.remove(
+
+                    "open"
+
+                );
 
             }
 
@@ -88,138 +155,102 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /* ==========================================
-       ACTIVE LINK
-    ========================================== */
+}
+/* ==========================================================
+   SCROLL SPY
+========================================================== */
 
-    const sections = document.querySelectorAll("section");
+function initializeScrollSpy(){
 
-    function activeMenu(){
+    const sections=
 
-        let current = "";
+    document.querySelectorAll(
 
-        sections.forEach(section=>{
+        "section"
 
-            const sectionTop =
-
-                section.offsetTop - 140;
-
-            const sectionHeight =
-
-                section.offsetHeight;
-
-            if(
-
-                window.scrollY >= sectionTop &&
-
-                window.scrollY <
-
-                sectionTop + sectionHeight
-
-            ){
-
-                current = section.getAttribute("id");
-
-            }
-
-        });
-
-        links.forEach(link=>{
-
-            link.classList.remove("active");
-
-            if(
-
-                link.getAttribute("href") ===
-
-                "#" + current
-
-            ){
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    }
-
-    activeMenu();
+    );
 
     window.addEventListener(
 
         "scroll",
 
-        activeMenu
+        ()=>{
+
+            let current="";
+
+            sections.forEach(section=>{
+
+                const top=
+
+                section.offsetTop-120;
+
+                if(
+
+                    scrollY>=top
+
+                ){
+
+                    current=
+
+                    section.id;
+
+                }
+
+            });
+
+            navLinks.forEach(link=>{
+
+                link.classList.remove(
+
+                    "active"
+
+                );
+
+                if(
+
+                    link.getAttribute("href")
+
+                    ===
+
+                    "#"+current
+
+                ){
+
+                    link.classList.add(
+
+                        "active"
+
+                    );
+
+                }
+
+            });
+
+        }
 
     );
 
-    /* ==========================================
-       GSAP INTRO
-    ========================================== */
+}
+/* ==========================================================
+   MOBILE MENU
+========================================================== */
 
-    if(typeof gsap !== "undefined"){
+if(menuButton){
 
-        gsap.from(
+    menuButton.addEventListener(
 
-            ".navbar",
+        "click",
 
-            {
+        ()=>{
 
-                y:-100,
+            mobileMenu.classList.toggle(
 
-                opacity:0,
+                "open"
 
-                duration:1,
+            );
 
-                ease:"power4.out"
+        }
 
-            }
+    );
 
-        );
-
-        gsap.from(
-
-            ".nav-link",
-
-            {
-
-                y:-30,
-
-                opacity:0,
-
-                stagger:.08,
-
-                delay:.25,
-
-                duration:.7,
-
-                ease:"power3.out"
-
-            }
-
-        );
-
-        gsap.from(
-
-            ".primary-btn",
-
-            {
-
-                scale:.8,
-
-                opacity:0,
-
-                delay:.45,
-
-                duration:.7,
-
-                ease:"back.out(1.7)"
-
-            }
-
-        );
-
-    }
-
-});
+}

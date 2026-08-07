@@ -2,234 +2,159 @@
 
 /* ==========================================================
    CIVICAI ANIMATION ENGINE
-   Version : 1.0
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
 
-    initializeRevealAnimations();
+    "DOMContentLoaded",
 
-    initializeMagneticButtons();
+    ()=>{
 
-    initializeHoverCards();
+        initializeReveal();
 
-    initializePageFade();
+        initializeCounters();
 
-});
+        initializeHoverCards();
+
+    }
+
+);
 
 /* ==========================================================
-   REVEAL ANIMATION
+   REVEAL
 ========================================================== */
 
-function initializeRevealAnimations(){
+function initializeReveal(){
 
-    if(typeof gsap === "undefined") return;
+    const elements =
 
-    gsap.registerPlugin(ScrollTrigger);
+        document.querySelectorAll(
 
-    const elements = [
+            ".reveal"
 
-        ".section-title",
+        );
 
-        ".section-subtitle",
+    if(!elements.length) return;
 
-        ".feature-card",
+    const observer =
 
-        ".dashboard-card",
+        new IntersectionObserver(
 
-        ".glass",
+            entries=>{
 
-        ".card",
+                entries.forEach(entry=>{
 
-        ".hero-stat"
+                    if(entry.isIntersecting){
 
-    ];
+                        entry.target.classList.add(
 
-    elements.forEach(selector=>{
+                            "active"
 
-        gsap.utils.toArray(selector).forEach(item=>{
-
-            gsap.from(
-
-                item,
-
-                {
-
-                    opacity:0,
-
-                    y:60,
-
-                    duration:.9,
-
-                    ease:"power3.out",
-
-                    scrollTrigger:{
-
-                        trigger:item,
-
-                        start:"top 85%",
-
-                        toggleActions:
-
-                        "play none none reverse"
+                        );
 
                     }
 
-                }
+                });
 
-            );
+            },
 
-        });
+            {
 
-    });
-
-}
-
-/* ==========================================================
-   STAGGER GROUP
-========================================================== */
-
-gsap.utils.toArray(
-
-    ".stagger-group"
-
-).forEach(group=>{
-
-    gsap.from(
-
-        group.children,
-
-        {
-
-            opacity:0,
-
-            y:50,
-
-            stagger:.12,
-
-            duration:.8,
-
-            ease:"power3.out",
-
-            scrollTrigger:{
-
-                trigger:group,
-
-                start:"top 80%"
-
-            }
-
-        }
-
-    );
-
-});
-
-/* ==========================================================
-   MAGNETIC BUTTONS
-========================================================== */
-
-function initializeMagneticButtons(){
-
-    const buttons = document.querySelectorAll(
-
-        ".primary-btn,.secondary-btn,.glass-btn"
-
-    );
-
-    buttons.forEach(button=>{
-
-        button.addEventListener(
-
-            "mousemove",
-
-            e=>{
-
-                const rect =
-
-                button.getBoundingClientRect();
-
-                const x =
-
-                e.clientX -
-
-                rect.left -
-
-                rect.width/2;
-
-                const y =
-
-                e.clientY -
-
-                rect.top -
-
-                rect.height/2;
-
-                gsap.to(
-
-                    button,
-
-                    {
-
-                        x:x*.18,
-
-                        y:y*.18,
-
-                        duration:.3,
-
-                        ease:"power2.out"
-
-                    }
-
-                );
+                threshold:.15
 
             }
 
         );
 
-        button.addEventListener(
+    elements.forEach(
 
-            "mouseleave",
+        element=>observer.observe(element)
 
-            ()=>{
+    );
 
-                gsap.to(
+}
+/* ==========================================================
+   COUNTER
+========================================================== */
 
-                    button,
+function initializeCounters(){
 
-                    {
+    const counters =
 
-                        x:0,
+        document.querySelectorAll(
 
-                        y:0,
-
-                        duration:.45,
-
-                        ease:"elastic.out(1,.4)"
-
-                    }
-
-                );
-
-            }
+            "[data-counter]"
 
         );
+
+    counters.forEach(counter=>{
+
+        animateCounter(counter);
 
     });
 
 }
 
+function animateCounter(element){
+
+    const target =
+
+        Number(
+
+            element.dataset.counter
+
+        );
+
+    let value = 0;
+
+    const speed =
+
+        Math.max(
+
+            1,
+
+            Math.floor(
+
+                target/120
+
+            )
+
+        );
+
+    const timer =
+
+        setInterval(()=>{
+
+            value += speed;
+
+            if(value >= target){
+
+                value = target;
+
+                clearInterval(timer);
+
+            }
+
+            element.textContent =
+
+                value.toLocaleString();
+
+        },16);
+
+}
 /* ==========================================================
-   HOVER CARDS
+   HOVER
 ========================================================== */
 
 function initializeHoverCards(){
 
-    const cards = document.querySelectorAll(
+    const cards =
 
-        ".dashboard-item,.feature-card,.glass"
+        document.querySelectorAll(
 
-    );
+            ".card"
+
+        );
 
     cards.forEach(card=>{
 
@@ -237,77 +162,33 @@ function initializeHoverCards(){
 
             "mousemove",
 
-            e=>{
+            event=>{
 
                 const rect =
 
-                card.getBoundingClientRect();
+                    card.getBoundingClientRect();
 
                 const x =
 
-                e.clientX -
-
-                rect.left;
+                    event.clientX - rect.left;
 
                 const y =
 
-                e.clientY -
+                    event.clientY - rect.top;
 
-                rect.top;
+                card.style.setProperty(
 
-                const rotateY =
+                    "--mouse-x",
 
-                ((x/rect.width)-.5)*10;
-
-                const rotateX =
-
-                ((y/rect.height)-.5)*-10;
-
-                gsap.to(
-
-                    card,
-
-                    {
-
-                        rotateX,
-
-                        rotateY,
-
-                        transformPerspective:1000,
-
-                        duration:.35,
-
-                        ease:"power2.out"
-
-                    }
+                    `${x}px`
 
                 );
 
-            }
+                card.style.setProperty(
 
-        );
+                    "--mouse-y",
 
-        card.addEventListener(
-
-            "mouseleave",
-
-            ()=>{
-
-                gsap.to(
-
-                    card,
-
-                    {
-
-                        rotateX:0,
-
-                        rotateY:0,
-
-                        duration:.5,
-
-                        ease:"power3.out"
-
-                    }
+                    `${y}px`
 
                 );
 
@@ -318,175 +199,14 @@ function initializeHoverCards(){
     });
 
 }
-
 /* ==========================================================
-   PAGE FADE
+   PUBLIC API
 ========================================================== */
 
-function initializePageFade(){
+window.CivicAnimations={
 
-    gsap.from(
+    reveal:initializeReveal,
 
-        "body",
-
-        {
-
-            opacity:0,
-
-            duration:.8,
-
-            ease:"power2.out"
-
-        }
-
-    );
-
-}
-
-/* ==========================================================
-   SMOOTH SECTION PARALLAX
-========================================================== */
-
-gsap.utils.toArray(
-
-    ".parallax"
-
-).forEach(item=>{
-
-    gsap.to(
-
-        item,
-
-        {
-
-            yPercent:20,
-
-            ease:"none",
-
-            scrollTrigger:{
-
-                trigger:item,
-
-                start:"top bottom",
-
-                end:"bottom top",
-
-                scrub:true
-
-            }
-
-        }
-
-    );
-
-});
-
-/* ==========================================================
-   ROTATING BLOBS
-========================================================== */
-
-gsap.utils.toArray(
-
-    ".rotate-slow"
-
-).forEach(item=>{
-
-    gsap.to(
-
-        item,
-
-        {
-
-            rotation:360,
-
-            duration:40,
-
-            repeat:-1,
-
-            ease:"none"
-
-        }
-
-    );
-
-});
-
-/* ==========================================================
-   FLOAT ELEMENTS
-========================================================== */
-
-gsap.utils.toArray(
-
-    ".float"
-
-).forEach(item=>{
-
-    gsap.to(
-
-        item,
-
-        {
-
-            y:-15,
-
-            duration:3,
-
-            repeat:-1,
-
-            yoyo:true,
-
-            ease:"sine.inOut"
-
-        }
-
-    );
-
-});
-
-/* ==========================================================
-   TEXT SPLIT READY
-========================================================== */
-
-window.AnimationEngine = {
-
-    reveal(element){
-
-        gsap.from(
-
-            element,
-
-            {
-
-                opacity:0,
-
-                y:40,
-
-                duration:.8,
-
-                ease:"power3.out"
-
-            }
-
-        );
-
-    },
-
-    fade(element){
-
-        gsap.from(
-
-            element,
-
-            {
-
-                opacity:0,
-
-                duration:.8
-
-            }
-
-        );
-
-    }
+    counters:initializeCounters
 
 };

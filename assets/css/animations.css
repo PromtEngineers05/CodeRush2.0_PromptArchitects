@@ -1,13 +1,10 @@
 /* ==========================================================
-   CIVICAI ANIMATIONS
-   Version : 1.0
+   CIVICAI ANIMATION LIBRARY
 ========================================================== */
 
 /* ==========================================================
    KEYFRAMES
 ========================================================== */
-
-/* Fade Up */
 
 @keyframes fadeUp{
 
@@ -15,7 +12,9 @@
 
         opacity:0;
 
-        transform:translateY(60px);
+        transform:
+
+            translateY(50px);
 
     }
 
@@ -23,13 +22,13 @@
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
 
 }
-
-/* Fade Down */
 
 @keyframes fadeDown{
 
@@ -37,7 +36,9 @@
 
         opacity:0;
 
-        transform:translateY(-60px);
+        transform:
+
+            translateY(-40px);
 
     }
 
@@ -45,13 +46,13 @@
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
 
 }
-
-/* Fade Left */
 
 @keyframes fadeLeft{
 
@@ -59,7 +60,9 @@
 
         opacity:0;
 
-        transform:translateX(-60px);
+        transform:
+
+            translateX(-40px);
 
     }
 
@@ -67,13 +70,13 @@
 
         opacity:1;
 
-        transform:translateX(0);
+        transform:
+
+            translateX(0);
 
     }
 
 }
-
-/* Fade Right */
 
 @keyframes fadeRight{
 
@@ -81,7 +84,9 @@
 
         opacity:0;
 
-        transform:translateX(60px);
+        transform:
+
+            translateX(40px);
 
     }
 
@@ -89,13 +94,16 @@
 
         opacity:1;
 
-        transform:translateX(0);
+        transform:
+
+            translateX(0);
 
     }
 
 }
-
-/* Zoom In */
+/* ==========================================================
+   SCALE
+========================================================== */
 
 @keyframes zoomIn{
 
@@ -103,7 +111,9 @@
 
         opacity:0;
 
-        transform:scale(.8);
+        transform:
+
+            scale(.85);
 
     }
 
@@ -111,79 +121,77 @@
 
         opacity:1;
 
-        transform:scale(1);
+        transform:
+
+            scale(1);
 
     }
 
 }
 
-/* Float */
-
-@keyframes float{
-
-    0%{
-
-        transform:translateY(0px);
-
-    }
-
-    50%{
-
-        transform:translateY(-18px);
-
-    }
-
-    100%{
-
-        transform:translateY(0px);
-
-    }
-
-}
-
-/* Float Slow */
-
-@keyframes floatSlow{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-28px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* Rotate */
-
-@keyframes rotate{
+@keyframes zoomOut{
 
     from{
 
-        transform:rotate(0deg);
+        transform:scale(1);
 
     }
 
     to{
 
-        transform:rotate(360deg);
+        transform:scale(.95);
+
+    }
+
+}
+/* ==========================================================
+   FLOAT
+========================================================== */
+
+@keyframes floating{
+
+    0%{
+
+        transform:
+
+            translateY(0px);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(0px);
 
     }
 
 }
 
-/* Pulse */
+.float{
+
+    animation:
+
+        floating
+
+        4s
+
+        ease-in-out
+
+        infinite;
+
+}
+/* ==========================================================
+   PULSE
+========================================================== */
 
 @keyframes pulse{
 
@@ -191,15 +199,11 @@
 
         transform:scale(1);
 
-        opacity:1;
-
     }
 
     50%{
 
-        transform:scale(1.08);
-
-        opacity:.8;
+        transform:scale(1.05);
 
     }
 
@@ -207,302 +211,291 @@
 
         transform:scale(1);
 
-        opacity:1;
-
     }
-
-}
-
-/* Glow */
-
-@keyframes glow{
-
-    0%{
-
-        box-shadow:0 0 20px rgba(79,124,255,.25);
-
-    }
-
-    50%{
-
-        box-shadow:0 0 70px rgba(79,124,255,.6);
-
-    }
-
-    100%{
-
-        box-shadow:0 0 20px rgba(79,124,255,.25);
-
-    }
-
-}
-
-/* Gradient */
-
-@keyframes gradientMove{
-
-    0%{
-
-        background-position:0% 50%;
-
-    }
-
-    50%{
-
-        background-position:100% 50%;
-
-    }
-
-    100%{
-
-        background-position:0% 50%;
-
-    }
-
-}
-
-/* Blur Blob */
-
-@keyframes blob{
-
-    0%{
-
-        transform:translate(0,0) scale(1);
-
-    }
-
-    25%{
-
-        transform:translate(80px,-40px) scale(1.15);
-
-    }
-
-    50%{
-
-        transform:translate(0,-70px) scale(.9);
-
-    }
-
-    75%{
-
-        transform:translate(-70px,40px) scale(1.1);
-
-    }
-
-    100%{
-
-        transform:translate(0,0) scale(1);
-
-    }
-
-}
-
-/* Scroll Indicator */
-
-@keyframes scroll{
-
-    0%{
-
-        opacity:0;
-
-        transform:translateY(0);
-
-    }
-
-    30%{
-
-        opacity:1;
-
-    }
-
-    100%{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-}
-
-/* Border Rotate */
-
-@keyframes borderRotate{
-
-    0%{
-
-        transform:rotate(0deg);
-
-    }
-
-    100%{
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-/* Shine */
-
-@keyframes shine{
-
-    0%{
-
-        transform:translateX(-120%);
-
-    }
-
-    100%{
-
-        transform:translateX(220%);
-
-    }
-
-}
-
-/* ==========================================================
-   ANIMATION UTILITIES
-========================================================== */
-
-.fade-up{
-
-    animation:fadeUp .8s ease forwards;
-
-}
-
-.fade-down{
-
-    animation:fadeDown .8s ease forwards;
-
-}
-
-.fade-left{
-
-    animation:fadeLeft .8s ease forwards;
-
-}
-
-.fade-right{
-
-    animation:fadeRight .8s ease forwards;
-
-}
-
-.zoom-in{
-
-    animation:zoomIn .8s ease forwards;
-
-}
-
-.float{
-
-    animation:float 6s ease-in-out infinite;
-
-}
-
-.float-slow{
-
-    animation:floatSlow 10s ease-in-out infinite;
-
-}
-
-.rotate{
-
-    animation:rotate 20s linear infinite;
 
 }
 
 .pulse{
 
-    animation:pulse 2s infinite;
+    animation:
+
+        pulse
+
+        2s
+
+        infinite;
+
+}
+/* ==========================================================
+   GLOW
+========================================================== */
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:
+
+            0 0 0 rgba(79,124,255,0);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 40px rgba(79,124,255,.45);
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 0 rgba(79,124,255,0);
+
+    }
 
 }
 
 .glow{
 
-    animation:glow 3s infinite;
+    animation:
+
+        glow
+
+        2.8s
+
+        infinite;
+
+}
+/* ==========================================================
+   ROTATE
+========================================================== */
+
+@keyframes rotate360{
+
+    from{
+
+        transform:
+
+            rotate(0deg);
+
+    }
+
+    to{
+
+        transform:
+
+            rotate(360deg);
+
+    }
 
 }
 
-.gradient-animation{
+.spin{
 
-    background-size:300% 300%;
+    animation:
 
-    animation:gradientMove 8s ease infinite;
+        rotate360
+
+        2s
+
+        linear
+
+        infinite;
+
+}
+/* ==========================================================
+   SHIMMER
+========================================================== */
+
+@keyframes shimmer{
+
+    0%{
+
+        transform:
+
+            translateX(-100%);
+
+    }
+
+    100%{
+
+        transform:
+
+            translateX(100%);
+
+    }
 
 }
 
-.blob{
+.shimmer{
 
-    animation:blob 18s ease-in-out infinite;
+    position:relative;
 
-}
-
-.scroll-animation{
-
-    animation:scroll 2s infinite;
+    overflow:hidden;
 
 }
 
+.shimmer::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(255,255,255,.12),
+
+            transparent
+
+        );
+
+    animation:
+
+        shimmer
+
+        1.6s
+
+        infinite;
+
+}
+/* ==========================================================
+   REVEAL
+========================================================== */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+
+        translateY(50px);
+
+    transition:
+
+        .8s ease;
+
+}
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:
+
+        translateY(0);
+
+}
+/* ==========================================================
+   TRANSITIONS
+========================================================== */
+
+.transition{
+
+    transition:
+
+        var(--transition);
+
+}
+
+.transition-slow{
+
+    transition:
+
+        var(--transition-slow);
+
+}
+/* ==========================================================
+   HOVER EFFECTS
+========================================================== */
+
+.hover-lift{
+
+    transition:
+
+        var(--transition);
+
+}
+
+.hover-lift:hover{
+
+    transform:
+
+        translateY(-8px);
+
+}
+
+.hover-scale{
+
+    transition:
+
+        var(--transition);
+
+}
+
+.hover-scale:hover{
+
+    transform:
+
+        scale(1.03);
+
+}
+
+.hover-rotate{
+
+    transition:
+
+        var(--transition);
+
+}
+
+.hover-rotate:hover{
+
+    transform:
+
+        rotate(3deg);
+
+}
 /* ==========================================================
    DELAYS
 ========================================================== */
 
 .delay-1{
 
-    animation-delay:.1s;
+    animation-delay:.15s;
 
 }
 
 .delay-2{
 
-    animation-delay:.2s;
+    animation-delay:.3s;
 
 }
 
 .delay-3{
 
-    animation-delay:.3s;
+    animation-delay:.45s;
 
 }
 
 .delay-4{
 
-    animation-delay:.4s;
+    animation-delay:.6s;
 
 }
 
 .delay-5{
 
-    animation-delay:.5s;
-
-}
-
-/* ==========================================================
-   DURATION
-========================================================== */
-
-.duration-fast{
-
-    animation-duration:.4s;
-
-}
-
-.duration-normal{
-
-    animation-duration:.8s;
-
-}
-
-.duration-slow{
-
-    animation-duration:1.4s;
-
-}
-
-.duration-extra{
-
-    animation-duration:3s;
+    animation-delay:.75s;
 
 }
