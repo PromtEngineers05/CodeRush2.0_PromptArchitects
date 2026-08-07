@@ -1,0 +1,211 @@
+<section
+    class="report section"
+    id="report">
+
+    <div class="container">
+
+        <!-- ==========================================
+            HEADER
+        =========================================== -->
+
+        <div class="report-header">
+
+            <div>
+
+                <div class="badge">
+
+                    📍 AI Complaint Registration
+
+                </div>
+
+                <h2 class="section-title">
+
+                    Report Civic Issues
+
+                    <span class="gradient-text">
+
+                        In Seconds
+
+                    </span>
+
+                </h2>
+
+                <p class="section-subtitle">
+
+                    Upload an image,
+                    describe the issue by voice,
+                    or type a complaint.
+                    CivicAI automatically understands,
+                    classifies,
+                    prioritizes,
+                    and routes the issue.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+            GRID
+        =========================================== -->
+
+        <div class="report-grid">
+
+            <!-- ==========================================
+                 LEFT PANEL
+            =========================================== -->
+
+            <div class="report-card card">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        Create Complaint
+
+                    </h3>
+
+                </div>
+
+                <form
+                    id="report-form"
+                    class="report-form">
+
+                    <div class="upload-box">
+
+                        <input
+                            type="file"
+                            id="complaint-image"
+                            accept="image/*"
+                            hidden>
+
+                        <label
+                            for="complaint-image"
+                            class="upload-area">
+
+                            <div class="upload-icon">
+
+                                📷
+
+                            </div>
+
+                            <h4>
+
+                                Upload Image
+
+                            </h4>
+
+                            <p>
+
+                                Drag & Drop
+                                or Click Here
+
+                            </p>
+
+                        </label>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Complaint Title
+
+                        </label>
+
+                        <input
+
+                            type="text"
+
+                            id="complaint-title"
+
+                            placeholder="Example : Large pothole near school">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Description
+
+                        </label>
+
+                        <textarea
+
+                            id="complaint-description"
+
+                            rows="6"
+
+                            placeholder="Describe the issue...">
+
+                        </textarea>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+
+                            type="button"
+
+                            id="voice-btn"
+
+                            class="secondary-btn">
+
+                            🎤 Voice
+
+                        </button>
+
+                        <button
+
+                            type="submit"
+
+                            class="primary-btn">
+
+                            Analyze With AI
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- ==========================================
+                 RIGHT PANEL
+            =========================================== -->
+
+            <div class="analysis-card card">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        AI Analysis
+
+                    </h3>
+
+                    <span class="status-chip">
+
+                        Waiting
+
+                    </span>
+
+                </div>
+
+                <div
+                    id="analysis-container">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
