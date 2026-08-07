@@ -816,3 +816,38 @@
     }
 
 }
+/* ==========================================================
+   WORKFLOW STATUS
+========================================================== */
+
+.workflow-status{
+
+    margin-top:30px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    font-weight:700;
+
+    color:#ffffff;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(79,124,255,.18),
+
+            rgba(0,212,255,.18)
+
+        );
+
+    border:
+
+        1px solid rgba(79,124,255,.25);
+
+}

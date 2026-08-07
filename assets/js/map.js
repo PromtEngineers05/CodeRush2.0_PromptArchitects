@@ -340,3 +340,120 @@ Drawing Tools
 Offline Tiles
 
 */
+/* ==========================================================
+   PUBLIC MAP API
+========================================================== */
+
+window.CivicAIMap = {
+
+    addComplaint,
+
+    clearComplaints
+
+};
+
+/* ==========================================================
+   ADD COMPLAINT
+========================================================== */
+
+function addComplaint(data){
+
+    if(
+
+        typeof L === "undefined" ||
+
+        !cityMap ||
+
+        !mapLayers.complaints
+
+    ){
+
+        return;
+
+    }
+
+    const marker =
+
+    L.circleMarker(
+
+        [
+
+            data.latitude,
+
+            data.longitude
+
+        ],
+
+        {
+
+            radius:10,
+
+            color:"#4F7CFF",
+
+            fillColor:"#4F7CFF",
+
+            fillOpacity:1,
+
+            weight:2
+
+        }
+
+    );
+
+    marker.bindPopup(
+
+        `
+            <strong>${data.title}</strong>
+
+            <br>
+
+            ${data.description}
+        `
+
+    );
+
+    marker.addTo(
+
+        mapLayers.complaints
+
+    );
+
+    cityMap.flyTo(
+
+        [
+
+            data.latitude,
+
+            data.longitude
+
+        ],
+
+        16,
+
+        {
+
+            duration:1.5
+
+        }
+
+    );
+
+}
+
+/* ==========================================================
+   CLEAR
+========================================================== */
+
+function clearComplaints(){
+
+    if(
+
+        mapLayers.complaints
+
+    ){
+
+        mapLayers.complaints.clearLayers();
+
+    }
+
+}

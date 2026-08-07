@@ -750,15 +750,14 @@ function renderAnalysisResult() {
 
         </div>
 
-        <button
+        <div
+    class="workflow-status">
 
-            class="primary-btn"
+    ✔ Automatically sending
+    complaint to
+    Mission Control...
 
-            id="continue-workflow">
-
-            Continue Workflow →
-
-        </button>
+</div>
 
     </div>
 

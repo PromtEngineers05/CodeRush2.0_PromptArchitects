@@ -1,0 +1,83 @@
+/* ==========================================================
+   MISSION CONTROL
+========================================================== */
+
+.mission-control{
+
+    position:relative;
+
+    padding:140px 0;
+
+}
+
+.mission-layout{
+
+    display:grid;
+
+    grid-template-columns:
+
+        1fr
+
+        520px;
+
+    gap:30px;
+
+}
+
+.thinking-card,
+
+.decision-card{
+
+    min-height:620px;
+
+}
+
+.thinking-stream{
+
+    padding:35px;
+
+    height:520px;
+
+    overflow:auto;
+
+}
+
+.thinking-line{
+
+    opacity:0;
+
+    padding:14px 18px;
+
+    margin-bottom:14px;
+
+    border-radius:14px;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    animation:
+
+        fadeLine .5s forwards;
+
+}
+
+@keyframes fadeLine{
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+#decision-panel{
+
+    padding:35px;
+
+}
