@@ -1,0 +1,615 @@
+/* ==========================================================
+   SMART CITY MAP
+   Version : 1.0
+========================================================== */
+
+.smart-map{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:140px 0;
+
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.smart-map::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-250px;
+
+    left:-250px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(79,124,255,.10),
+
+        transparent 70%
+
+    );
+
+    filter:blur(120px);
+
+    pointer-events:none;
+
+}
+
+.smart-map::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-250px;
+
+    bottom:-250px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(0,212,255,.10),
+
+        transparent 70%
+
+    );
+
+    filter:blur(120px);
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.map-header{
+
+    max-width:900px;
+
+    margin:0 auto 80px;
+
+}
+
+.map-header .badge{
+
+    margin-bottom:22px;
+
+}
+
+.map-header .section-title{
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.map-layout{
+
+    display:grid;
+
+    grid-template-columns:
+
+        2fr
+
+        420px;
+
+    gap:30px;
+
+    align-items:start;
+
+}
+
+/* ==========================================================
+   MAP CARD
+========================================================== */
+
+.map-card{
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+
+        blur(30px);
+
+    -webkit-backdrop-filter:
+
+        blur(30px);
+
+    transition:
+
+        transform .45s,
+
+        border-color .35s,
+
+        box-shadow .35s;
+
+}
+
+.map-card:hover{
+
+    transform:
+
+        translateY(-8px);
+
+    border-color:
+
+        rgba(79,124,255,.20);
+
+    box-shadow:
+
+        0 35px 90px rgba(0,0,0,.35),
+
+        0 0 70px rgba(79,124,255,.12);
+
+}
+
+/* ==========================================================
+   MAP AREA
+========================================================== */
+
+#city-map{
+
+    position:relative;
+
+    height:720px;
+
+    overflow:hidden;
+
+    border-radius:
+
+        0 0 30px 30px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #0A1224,
+
+            #101C36
+
+        );
+
+}
+/* ==========================================================
+   MAP GRID
+========================================================== */
+
+#city-map::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(255,255,255,.04) 1px,
+
+            transparent 1px
+
+        ),
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,255,255,.04) 1px,
+
+            transparent 1px
+
+        );
+
+    background-size:48px 48px;
+
+    animation:
+
+        mapGridMove 20s linear infinite;
+
+    opacity:.45;
+
+}
+
+/* ==========================================================
+   MAP GLOW
+========================================================== */
+
+#city-map::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            circle at center,
+
+            rgba(79,124,255,.10),
+
+            transparent 70%
+
+        );
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.map-sidebar{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+/* ==========================================================
+   MAP WIDGET
+========================================================== */
+
+.map-widget{
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+
+        blur(30px);
+
+    -webkit-backdrop-filter:
+
+        blur(30px);
+
+    transition:var(--transition);
+
+}
+
+.map-widget:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* ==========================================================
+   LAYER LIST
+========================================================== */
+
+.layer-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:28px;
+
+}
+
+.layer-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px 20px;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+    transition:var(--transition);
+
+}
+
+.layer-item:hover{
+
+    transform:translateX(6px);
+
+    background:
+
+        rgba(255,255,255,.07);
+
+}
+
+.layer-item input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:var(--primary);
+
+}
+
+.layer-item span{
+
+    flex:1;
+
+    margin-left:16px;
+
+    color:var(--text-light);
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   AI INSIGHTS
+========================================================== */
+
+.map-insights{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:28px;
+
+}
+
+.insight-card{
+
+    position:relative;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+    transition:var(--transition);
+
+}
+
+.insight-card:hover{
+
+    transform:
+
+        translateY(-5px);
+
+    border-color:
+
+        rgba(79,124,255,.18);
+
+}
+
+.insight-title{
+
+    margin-bottom:10px;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+.insight-description{
+
+    color:var(--text-muted);
+
+    line-height:1.7;
+
+    font-size:.92rem;
+
+}
+
+/* ==========================================================
+   MAP MARKER
+========================================================== */
+
+.map-marker{
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    box-shadow:
+
+        0 0 20px rgba(79,124,255,.65);
+
+}
+
+.map-marker::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid rgba(79,124,255,.25);
+
+    animation:
+
+        pulse 2s infinite;
+
+}
+
+/* ==========================================================
+   RISK MARKER
+========================================================== */
+
+.map-marker.high{
+
+    background:var(--danger);
+
+    box-shadow:
+
+        0 0 22px rgba(255,77,109,.7);
+
+}
+
+.map-marker.medium{
+
+    background:var(--warning);
+
+    box-shadow:
+
+        0 0 22px rgba(255,179,71,.7);
+
+}
+
+.map-marker.low{
+
+    background:var(--success);
+
+    box-shadow:
+
+        0 0 22px rgba(0,208,132,.7);
+
+}
+
+/* ==========================================================
+   GRID ANIMATION
+========================================================== */
+
+@keyframes mapGridMove{
+
+    from{
+
+        transform:translate(0,0);
+
+    }
+
+    to{
+
+        transform:translate(48px,48px);
+
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1200px){
+
+    .map-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .map-sidebar{
+
+        display:grid;
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .smart-map{
+
+        padding:100px 0;
+
+    }
+
+    #city-map{
+
+        height:500px;
+
+    }
+
+    .map-sidebar{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

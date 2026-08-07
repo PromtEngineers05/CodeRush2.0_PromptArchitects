@@ -1,0 +1,436 @@
+/* ==========================================================
+   CIVICAI TYPOGRAPHY
+   Version : 1.0
+========================================================== */
+
+/* ==========================================================
+   BODY
+========================================================== */
+
+body{
+
+    font-family:var(--font-family);
+
+    font-size:var(--fs-base);
+
+    font-weight:var(--fw-normal);
+
+    line-height:1.7;
+
+    color:var(--text);
+
+}
+
+/* ==========================================================
+   DISPLAY TITLES
+========================================================== */
+
+.display-xl{
+
+    font-size:clamp(4rem,9vw,8rem);
+
+    font-weight:900;
+
+    line-height:.95;
+
+    letter-spacing:-5px;
+
+}
+
+.display-lg{
+
+    font-size:clamp(3.5rem,8vw,6.5rem);
+
+    font-weight:900;
+
+    line-height:1;
+
+    letter-spacing:-4px;
+
+}
+
+.display-md{
+
+    font-size:clamp(3rem,6vw,5rem);
+
+    font-weight:800;
+
+    line-height:1.05;
+
+    letter-spacing:-3px;
+
+}
+
+/* ==========================================================
+   HEADINGS
+========================================================== */
+
+h1{
+
+    font-size:clamp(3rem,7vw,5.8rem);
+
+    font-weight:900;
+
+    line-height:1.05;
+
+    letter-spacing:-3px;
+
+}
+
+h2{
+
+    font-size:clamp(2.5rem,5vw,4.5rem);
+
+    font-weight:800;
+
+    line-height:1.1;
+
+    letter-spacing:-2px;
+
+}
+
+h3{
+
+    font-size:clamp(2rem,4vw,3rem);
+
+    font-weight:800;
+
+    line-height:1.2;
+
+}
+
+h4{
+
+    font-size:clamp(1.5rem,3vw,2rem);
+
+    font-weight:700;
+
+}
+
+h5{
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+}
+
+h6{
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   PARAGRAPH
+========================================================== */
+
+p{
+
+    font-size:1.05rem;
+
+    color:var(--text-light);
+
+    line-height:1.9;
+
+}
+
+/* ==========================================================
+   SMALL TEXT
+========================================================== */
+
+small{
+
+    font-size:.875rem;
+
+    color:var(--text-muted);
+
+}
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+label{
+
+    display:block;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+/* ==========================================================
+   GRADIENT TEXT
+========================================================== */
+
+.gradient-text{
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--secondary),
+
+        var(--accent)
+
+    );
+
+    background-size:300% 300%;
+
+    background-clip:text;
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+/* ==========================================================
+   TEXT UTILITIES
+========================================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.text-primary{
+
+    color:var(--primary);
+
+}
+
+.text-secondary{
+
+    color:var(--secondary);
+
+}
+
+.text-success{
+
+    color:var(--success);
+
+}
+
+.text-danger{
+
+    color:var(--danger);
+
+}
+
+.text-warning{
+
+    color:var(--warning);
+
+}
+
+.text-light{
+
+    color:var(--text-light);
+
+}
+
+.text-muted{
+
+    color:var(--text-muted);
+
+}
+
+/* ==========================================================
+   FONT WEIGHTS
+========================================================== */
+
+.fw-light{
+
+    font-weight:300;
+
+}
+
+.fw-normal{
+
+    font-weight:400;
+
+}
+
+.fw-medium{
+
+    font-weight:500;
+
+}
+
+.fw-semibold{
+
+    font-weight:600;
+
+}
+
+.fw-bold{
+
+    font-weight:700;
+
+}
+
+.fw-black{
+
+    font-weight:900;
+
+}
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.section-title{
+
+    font-size:clamp(2.5rem,6vw,4.8rem);
+
+    font-weight:900;
+
+    line-height:1.1;
+
+    letter-spacing:-2px;
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================================
+   SECTION SUBTITLE
+========================================================== */
+
+.section-subtitle{
+
+    max-width:760px;
+
+    margin-inline:auto;
+
+    font-size:1.15rem;
+
+    color:var(--text-light);
+
+    line-height:1.9;
+
+}
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 20px;
+
+    border-radius:999px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.link{
+
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.link::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-4px;
+
+    width:0;
+
+    height:2px;
+
+    background:var(--primary);
+
+    transition:var(--transition);
+
+}
+
+.link:hover::after{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+    p{
+
+        font-size:1rem;
+
+        line-height:1.8;
+
+    }
+
+    .section-subtitle{
+
+        font-size:1rem;
+
+    }
+
+}

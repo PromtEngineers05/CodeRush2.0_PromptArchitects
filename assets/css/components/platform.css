@@ -1,0 +1,679 @@
+/* ==========================================================
+   PLATFORM SECTION
+   Version : 1.0
+========================================================== */
+
+.platform{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:140px 0;
+
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.platform::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-250px;
+
+    right:-250px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(79,124,255,.12),
+
+        transparent 70%
+
+    );
+
+    filter:blur(120px);
+
+    pointer-events:none;
+
+}
+
+.platform::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-300px;
+
+    bottom:-250px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(0,212,255,.10),
+
+        transparent 70%
+
+    );
+
+    filter:blur(120px);
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.platform-header{
+
+    max-width:900px;
+
+    margin:0 auto 90px;
+
+}
+
+.platform-header .badge{
+
+    margin-bottom:22px;
+
+}
+
+.platform-header .section-title{
+
+    margin-bottom:26px;
+
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.platform-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(12,1fr);
+
+    gap:30px;
+
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.platform-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:32px;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+
+        blur(30px);
+
+    -webkit-backdrop-filter:
+
+        blur(30px);
+
+    transition:
+
+        transform .45s cubic-bezier(.22,1,.36,1),
+
+        border-color .35s,
+
+        box-shadow .35s;
+
+}
+
+.platform-card:hover{
+
+    transform:
+
+        translateY(-10px);
+
+    border-color:
+
+        rgba(79,124,255,.25);
+
+    box-shadow:
+
+        0 35px 90px rgba(0,0,0,.35),
+
+        0 0 80px rgba(79,124,255,.15);
+
+}
+
+/* ==========================================================
+   GRID SIZE
+========================================================== */
+
+.ai-pipeline{
+
+    grid-column:span 12;
+
+    padding:40px;
+
+}
+
+.ai-vision{
+
+    grid-column:span 7;
+
+}
+
+.ai-chat{
+
+    grid-column:span 5;
+
+}
+
+/* ==========================================================
+   CARD HEADER
+========================================================== */
+
+.platform-card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:50px;
+
+}
+
+.platform-card-header h3{
+
+    margin-top:18px;
+
+    font-size:2rem;
+
+    font-weight:800;
+
+}
+
+/* ==========================================================
+   AI PIPELINE
+========================================================== */
+
+.pipeline{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:28px;
+
+    align-items:center;
+
+}
+
+.pipeline-step{
+
+    position:relative;
+
+    z-index:2;
+
+    padding:34px 28px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    transition:
+
+        transform .45s,
+
+        border-color .35s,
+
+        background .35s,
+
+        box-shadow .35s;
+
+}
+
+.pipeline-step:hover{
+
+    transform:
+
+        translateY(-10px);
+
+    background:
+
+        rgba(255,255,255,.08);
+
+    border-color:
+
+        rgba(79,124,255,.25);
+
+    box-shadow:
+
+        0 25px 70px rgba(0,0,0,.30),
+
+        0 0 60px rgba(79,124,255,.15);
+
+}
+
+/* ==========================================================
+   PIPELINE ICON
+========================================================== */
+
+.pipeline-icon{
+
+    width:78px;
+
+    height:78px;
+
+    margin:0 auto 22px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:24px;
+
+    font-size:2rem;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--primary),
+
+            var(--secondary)
+
+        );
+
+    box-shadow:
+
+        0 18px 40px rgba(79,124,255,.30);
+
+    transition:.45s;
+
+}
+
+.pipeline-step:hover .pipeline-icon{
+
+    transform:
+
+        rotate(-8deg)
+
+        scale(1.08);
+
+}
+
+/* ==========================================================
+   PIPELINE TEXT
+========================================================== */
+
+.pipeline-step h4{
+
+    margin-bottom:14px;
+
+    font-size:1.25rem;
+
+    font-weight:700;
+
+}
+
+.pipeline-step p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+    font-size:.96rem;
+
+}
+
+/* ==========================================================
+   CONNECTOR
+========================================================== */
+
+.pipeline-line{
+
+    position:absolute;
+
+    top:50%;
+
+    height:4px;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(79,124,255,.15),
+
+            rgba(0,212,255,.45),
+
+            rgba(79,124,255,.15)
+
+        );
+
+    overflow:hidden;
+
+    z-index:1;
+
+}
+
+.pipeline-line::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-25%;
+
+    top:0;
+
+    width:25%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #ffffff,
+
+            transparent
+
+        );
+
+    animation:
+
+        pipelineFlow 3s linear infinite;
+
+}
+
+.pipeline-line:nth-of-type(2){
+
+    left:24%;
+
+    width:10%;
+
+}
+
+.pipeline-line:nth-of-type(4){
+
+    left:49%;
+
+    width:10%;
+
+}
+
+.pipeline-line:nth-of-type(6){
+
+    left:74%;
+
+    width:10%;
+
+}
+
+/* ==========================================================
+   AI VISION
+========================================================== */
+
+.vision-tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:32px;
+
+}
+
+.vision-tags span{
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    color:#fff;
+
+    background:
+
+        rgba(255,255,255,.06);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    transition:var(--transition);
+
+}
+
+.vision-tags span:hover{
+
+    transform:
+
+        translateY(-4px);
+
+    background:
+
+        rgba(255,255,255,.10);
+
+}
+
+/* ==========================================================
+   AI CHAT
+========================================================== */
+
+.ai-chat .card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    height:100%;
+
+}
+
+/* ==========================================================
+   KEYFRAMES
+========================================================== */
+
+@keyframes pipelineFlow{
+
+    from{
+
+        left:-25%;
+
+    }
+
+    to{
+
+        left:125%;
+
+    }
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1200px){
+
+    .pipeline{
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+    }
+
+    .pipeline-line{
+
+        display:none;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .ai-vision,
+
+    .ai-chat{
+
+        grid-column:span 12;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .platform{
+
+        padding:100px 0;
+
+    }
+
+    .platform-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .ai-pipeline,
+
+    .ai-vision,
+
+    .ai-chat{
+
+        grid-column:span 1;
+
+    }
+
+    .pipeline{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .ai-pipeline{
+
+        padding:28px;
+
+    }
+
+}
+/* ==========================================================
+   PLATFORM GLOW
+========================================================== */
+
+.platform-glow{
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(79,124,255,.18),
+
+            transparent 70%
+
+        );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.platform-card:hover .platform-glow{
+
+    opacity:1;
+
+}

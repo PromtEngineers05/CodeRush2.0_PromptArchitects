@@ -1,0 +1,695 @@
+/* ==========================================================
+   DASHBOARD
+   Version : 1.0
+========================================================== */
+
+.dashboard{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:140px 0;
+
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.dashboard::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-300px;
+
+    left:-250px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(79,124,255,.10),
+
+            transparent 70%
+
+        );
+
+    filter:blur(130px);
+
+    pointer-events:none;
+
+}
+
+.dashboard::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-250px;
+
+    bottom:-300px;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(0,212,255,.10),
+
+            transparent 70%
+
+        );
+
+    filter:blur(130px);
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.dashboard-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-bottom:80px;
+
+}
+
+.dashboard-header .badge{
+
+    margin-bottom:22px;
+
+}
+
+.dashboard-header .section-title{
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(12,1fr);
+
+    gap:28px;
+
+}
+
+/* ==========================================================
+   PANELS
+========================================================== */
+
+.dashboard-panel{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:
+
+        rgba(255,255,255,.05);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(30px);
+
+    -webkit-backdrop-filter:blur(30px);
+
+    transition:
+
+        transform .45s cubic-bezier(.22,1,.36,1),
+
+        box-shadow .35s,
+
+        border-color .35s;
+
+}
+
+.dashboard-panel:hover{
+
+    transform:
+
+        translateY(-10px);
+
+    border-color:
+
+        rgba(79,124,255,.25);
+
+    box-shadow:
+
+        0 35px 90px rgba(0,0,0,.35),
+
+        0 0 70px rgba(79,124,255,.15);
+
+}
+
+/* ==========================================================
+   PANEL HEADER
+========================================================== */
+
+.panel-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:28px 30px;
+
+    border-bottom:
+
+        1px solid rgba(255,255,255,.06);
+
+}
+
+.panel-header h3{
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   GRID SIZE
+========================================================== */
+
+.city-health{
+
+    grid-column:span 5;
+
+    min-height:420px;
+
+}
+
+.complaint-panel{
+
+    grid-column:span 7;
+
+    min-height:420px;
+
+}
+
+.ai-panel{
+
+    grid-column:span 4;
+
+    min-height:360px;
+
+}
+
+.map-panel{
+
+    grid-column:span 8;
+
+    min-height:360px;
+
+}
+/* ==========================================================
+   CHART AREA
+========================================================== */
+
+.dashboard-chart{
+
+    position:relative;
+
+    height:320px;
+
+    padding:28px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ==========================================================
+   CHART PLACEHOLDER
+   (Will be replaced by Chart.js later)
+========================================================== */
+
+.dashboard-chart::before{
+
+    content:"";
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    background:
+
+    conic-gradient(
+
+        var(--primary) 0deg,
+
+        var(--secondary) 130deg,
+
+        rgba(255,255,255,.08) 130deg,
+
+        rgba(255,255,255,.08) 360deg
+
+    );
+
+    animation:
+
+        rotate 16s linear infinite;
+
+    opacity:.85;
+
+}
+
+.dashboard-chart::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+
+    height:150px;
+
+    border-radius:50%;
+
+    background:var(--bg);
+
+    border:
+
+        1px solid rgba(255,255,255,.08);
+
+}
+
+/* ==========================================================
+   MODULE LIST
+========================================================== */
+
+.module-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:28px;
+
+}
+
+.module-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    background:
+
+        rgba(255,255,255,.04);
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+    transition:var(--transition);
+
+}
+
+.module-item:hover{
+
+    transform:translateX(6px);
+
+    background:
+
+        rgba(255,255,255,.07);
+
+}
+
+.module-item span{
+
+    font-weight:600;
+
+    color:var(--text-light);
+
+}
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.module-status{
+
+    position:relative;
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:var(--success);
+
+    box-shadow:
+
+        0 0 20px rgba(0,208,132,.55);
+
+}
+
+.module-status::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-6px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid rgba(0,208,132,.25);
+
+    animation:
+
+        pulse 2s infinite;
+
+}
+
+/* ==========================================================
+   MAP
+========================================================== */
+
+#dashboard-map{
+
+    position:relative;
+
+    height:280px;
+
+    margin:28px;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #0B1224,
+
+            #101A35
+
+        );
+
+    border:
+
+        1px solid rgba(255,255,255,.06);
+
+}
+
+/* Grid */
+
+#dashboard-map::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+        linear-gradient(
+
+            rgba(255,255,255,.04) 1px,
+
+            transparent 1px
+
+        ),
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(255,255,255,.04) 1px,
+
+            transparent 1px
+
+        );
+
+    background-size:42px 42px;
+
+}
+
+/* ==========================================================
+   MAP PULSE
+========================================================== */
+
+#dashboard-map::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:var(--danger);
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+
+        0 0 25px rgba(255,77,109,.8);
+
+    animation:
+
+        pulse 2s infinite;
+
+}
+
+/* ==========================================================
+   PANEL GLOW
+========================================================== */
+
+.dashboard-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    right:-120px;
+
+    top:-120px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(79,124,255,.15),
+
+            transparent 70%
+
+        );
+
+    filter:blur(35px);
+
+    opacity:.8;
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1200px){
+
+    .city-health{
+
+        grid-column:span 12;
+
+    }
+
+    .complaint-panel{
+
+        grid-column:span 12;
+
+    }
+
+    .ai-panel{
+
+        grid-column:span 5;
+
+    }
+
+    .map-panel{
+
+        grid-column:span 7;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .city-health,
+
+    .complaint-panel,
+
+    .ai-panel,
+
+    .map-panel{
+
+        grid-column:span 1;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard{
+
+        padding:100px 0;
+
+    }
+
+    .dashboard-header{
+
+        margin-bottom:60px;
+
+    }
+
+    .dashboard-chart{
+
+        height:260px;
+
+    }
+
+    #dashboard-map{
+
+        height:240px;
+
+        margin:20px;
+
+    }
+
+    .panel-header{
+
+        padding:22px;
+
+    }
+
+}
+/* ==========================================================
+   DASHBOARD GLOW
+========================================================== */
+
+.dashboard-glow{
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    transform:
+
+        translate(-50%,-50%);
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(79,124,255,.18),
+
+            transparent 70%
+
+        );
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.dashboard-panel:hover .dashboard-glow{
+
+    opacity:1;
+
+}

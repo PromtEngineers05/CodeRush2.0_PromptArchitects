@@ -1,0 +1,206 @@
+<section
+    class="smart-map section"
+    id="map">
+
+    <div class="container">
+
+        <!-- ==========================================
+             SECTION HEADER
+        =========================================== -->
+
+        <div class="map-header">
+
+            <div>
+
+                <div class="badge">
+
+                    🌍 Real-Time Geospatial Intelligence
+
+                </div>
+
+                <h2 class="section-title">
+
+                    Interactive
+
+                    <span class="gradient-text">
+
+                        Smart City Map
+
+                    </span>
+
+                </h2>
+
+                <p class="section-subtitle">
+
+                    Visualize civic complaints,
+                    AI predictions,
+                    infrastructure assets,
+                    safety alerts,
+                    field workers,
+                    and department activities
+                    on one intelligent map.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             MAP GRID
+        =========================================== -->
+
+        <div class="map-layout">
+
+            <!-- ==========================================
+                 MAP
+            =========================================== -->
+
+            <div class="map-card card">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        Live City Map
+
+                    </h3>
+
+                    <span class="status-chip">
+
+                        Live
+
+                    </span>
+
+                </div>
+
+                <div id="city-map"></div>
+
+            </div>
+
+            <!-- ==========================================
+                 MAP CONTROLS
+            =========================================== -->
+
+            <aside class="map-sidebar">
+
+                <div class="map-widget card">
+
+                    <div class="panel-header">
+
+                        <h3>
+
+                            Map Layers
+
+                        </h3>
+
+                    </div>
+
+                    <div class="layer-list">
+
+                        <label class="layer-item">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                data-layer="complaints">
+
+                            <span>
+
+                                Complaints
+
+                            </span>
+
+                        </label>
+
+                        <label class="layer-item">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                data-layer="workers">
+
+                            <span>
+
+                                Field Workers
+
+                            </span>
+
+                        </label>
+
+                        <label class="layer-item">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                data-layer="prediction">
+
+                            <span>
+
+                                AI Prediction
+
+                            </span>
+
+                        </label>
+
+                        <label class="layer-item">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                data-layer="risk">
+
+                            <span>
+
+                                Risk Zones
+
+                            </span>
+
+                        </label>
+
+                        <label class="layer-item">
+
+                            <input
+                                type="checkbox"
+                                checked
+                                data-layer="safety">
+
+                            <span>
+
+                                Safety Alerts
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="map-widget card">
+
+                    <div class="panel-header">
+
+                        <h3>
+
+                            AI Insights
+
+                        </h3>
+
+                    </div>
+
+                    <div
+                        class="map-insights"
+                        id="map-insights">
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
