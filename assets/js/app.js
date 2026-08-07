@@ -90,6 +90,31 @@ async function loadAllComponents() {
         },
 
         {
+            id:"my-complaints",
+            path:"./components/my-complaints.html"
+        },
+
+        {
+            id:"timeline",
+            path:"./components/timeline.html"
+        },
+
+        {
+            id:"notifications",
+            path:"./components/notifications.html"
+        },
+
+        {
+            id:"profile",
+            path:"./components/profile.html"
+        },
+        
+        {
+            id:"complaint-details",
+            path:"./components/complaint-details.html"
+        },
+
+        {
             id: "features",
             path: "./components/features.html"
         },
