@@ -74,19 +74,21 @@
 
     </div>
 
-    <div id="loader"></div>
-
     <!-- ==========================================
         APP
     =========================================== -->
 
     <main>
 
+        <div id="auth"></div>
+
         <div id="navbar"></div>
 
         <div id="hero"></div>
 
         <div id="report"></div>
+
+        <div id="ai-vision"></div>
 
         <div id="features"></div>
 
@@ -96,9 +98,11 @@
 
         <div id="dashboard"></div>
 
-        <div id="map"></div>
+        <div id="citizen-dashboard"></div>
 
-        <div id="officer-dashboard"></div>
+        <div id="authority-dashboard"></div>
+
+        <div id="map"></div>
 
         <div id="footer"></div>
 
@@ -118,6 +122,9 @@
 
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
+    <!-- Leaflet map runtime -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <!-- ==========================================
         JAVASCRIPT
     =========================================== -->
@@ -134,11 +141,11 @@
 
     <script src="./assets/js/modules/platform.js"></script>
 
-    <script src="./assets/js/dashboard.js"></script>
+    <script src="./assets/js/modules/dashboard.js"></script>
 
     <script src="./assets/js/map.js"></script>
 
-    <script src="./assets/js/report.js"></script>
+    <script src="./components/report.js"></script>
     <script src="./assets/js/constants.js"></script>
     <script src="./assets/js/utils.js"></script>
     <script src="./assets/js/events.js"></script>
@@ -146,9 +153,14 @@
     <script src="./assets/js/error-handler.js"></script>
 
     <script src="./assets/js/performance.js"></script>
-    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/core/config.js"></script>
 
     <script src="./assets/js/app.js"></script>
+
+    <script src="./assets/js/ai-vision.js"></script>
+    <script src="./assets/js/mission-control.js"></script>
+    <script src="./assets/js/role-dashboards.js"></script>
+    <script src="./assets/js/auth.js"></script>
 
 </body>
 
