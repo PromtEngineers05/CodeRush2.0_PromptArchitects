@@ -21,71 +21,71 @@ document.addEventListener(
 ========================================================== */
 
 const uploadArea =
-
 document.getElementById(
-
     "upload-area"
-
 );
 
 const imageInput =
-
 document.getElementById(
-
     "complaint-image"
-
 );
 
 const previewContainer =
-
 document.getElementById(
-
     "image-preview"
-
 );
 
 const analysisContainer =
-
 document.getElementById(
-
     "analysis-container"
-
 );
 
 const reportForm =
-
 document.getElementById(
-
     "report-form"
-
 );
 
 const locationInput =
-
 document.getElementById(
-
     "location"
-
 );
 
 const locationButton =
-
 document.getElementById(
-
     "detect-location"
-
 );
 
 const voiceButton =
-
 document.getElementById(
-
     "voice-btn"
-
 );
 
 /* ==========================================================
-   INIT
+   AI RESULT
+========================================================== */
+
+const AI_RESULT = {
+
+    issue : "Pothole",
+
+    confidence : 98,
+
+    severity : "Critical",
+
+    department : "Road Department",
+
+    priority : "P1",
+
+    estimatedTime : "24 Hours",
+
+    explanation :
+
+        "Deep pothole detected. AI recommends immediate maintenance because of high accident probability."
+
+};
+
+/* ==========================================================
+   INITIALIZE
 ========================================================== */
 
 function initializeReport(){
@@ -101,13 +101,18 @@ function initializeReport(){
     initializeForm();
 
 }
+
 /* ==========================================================
    IMAGE UPLOAD
 ========================================================== */
 
 function initializeUpload(){
 
-    if(!uploadArea) return;
+    if(!uploadArea || !imageInput){
+
+        return;
+
+    }
 
     uploadArea.addEventListener(
 
@@ -129,9 +134,13 @@ function initializeUpload(){
 
             const file =
 
-            event.target.files[0];
+                event.target.files[0];
 
-            if(!file) return;
+            if(!file){
+
+                return;
+
+            }
 
             showPreview(file);
 
@@ -141,58 +150,73 @@ function initializeUpload(){
 
 }
 
+/* ==========================================================
+   IMAGE PREVIEW
+========================================================== */
+
 function showPreview(file){
 
-    const reader = new FileReader();
+    const reader =
 
-    reader.onload = event=>{
+        new FileReader();
 
-        previewContainer.classList.add("active");
+    reader.onload =
 
-        previewContainer.innerHTML = `
+        event=>{
 
-            <div class="preview-wrapper">
+            previewContainer.classList.add(
+
+                "active"
+
+            );
+
+            previewContainer.innerHTML =
+
+            `
+
+            <div
+                class="preview-wrapper">
 
                 <img
-
                     id="preview-image"
-
                     src="${event.target.result}"
-
-                    alt="Complaint Preview">
+                    alt="Complaint">
 
                 <div
-
                     id="ai-overlay"
-
                     class="ai-overlay">
 
                 </div>
 
                 <div
-
                     id="scan-line"
-
                     class="scan-line">
 
                 </div>
 
             </div>
 
-        `;
+            `;
 
-        startAIScan();
+            startAIScan();
 
-    };
+        };
 
     reader.readAsDataURL(file);
 
 }
+
 /* ==========================================================
-   DRAG & DROP
+   DRAG DROP
 ========================================================== */
 
 function initializeDragDrop(){
+
+    if(!uploadArea){
+
+        return;
+
+    }
 
     [
 
@@ -200,27 +224,31 @@ function initializeDragDrop(){
 
         "dragover"
 
-    ].forEach(name=>{
+    ].forEach(
 
-        uploadArea.addEventListener(
+        eventName=>{
 
-            name,
+            uploadArea.addEventListener(
 
-            event=>{
+                eventName,
 
-                event.preventDefault();
+                event=>{
 
-                uploadArea.classList.add(
+                    event.preventDefault();
 
-                    "dragging"
+                    uploadArea.classList.add(
 
-                );
+                        "dragging"
 
-            }
+                    );
 
-        );
+                }
 
-    });
+            );
+
+        }
+
+    );
 
     [
 
@@ -228,27 +256,31 @@ function initializeDragDrop(){
 
         "drop"
 
-    ].forEach(name=>{
+    ].forEach(
 
-        uploadArea.addEventListener(
+        eventName=>{
 
-            name,
+            uploadArea.addEventListener(
 
-            event=>{
+                eventName,
 
-                event.preventDefault();
+                event=>{
 
-                uploadArea.classList.remove(
+                    event.preventDefault();
 
-                    "dragging"
+                    uploadArea.classList.remove(
 
-                );
+                        "dragging"
 
-            }
+                    );
 
-        );
+                }
 
-    });
+            );
+
+        }
+
+    );
 
     uploadArea.addEventListener(
 
@@ -256,11 +288,15 @@ function initializeDragDrop(){
 
         event=>{
 
-            const file=
+            const file =
 
-            event.dataTransfer.files[0];
+                event.dataTransfer.files[0];
 
-            if(!file) return;
+            if(!file){
+
+                return;
+
+            }
 
             showPreview(file);
 
@@ -269,285 +305,6 @@ function initializeDragDrop(){
     );
 
 }
-/* ==========================================================
-   LOCATION
-========================================================== */
-
-function initializeLocation(){
-
-    if(!locationButton) return;
-
-    locationButton.addEventListener(
-
-        "click",
-
-        detectLocation
-
-    );
-
-}
-
-function detectLocation(){
-
-    if(
-
-        !navigator.geolocation
-
-    ){
-
-        alert(
-
-            "Geolocation not supported."
-
-        );
-
-        return;
-
-    }
-
-    locationInput.value =
-
-    "Detecting...";
-
-    navigator.geolocation.getCurrentPosition(
-
-        position=>{
-
-            const lat=
-
-            position.coords.latitude;
-
-            const lng=
-
-            position.coords.longitude;
-
-            locationInput.value=
-
-            `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-
-        },
-
-        ()=>{
-
-            locationInput.value=
-
-            "Location unavailable";
-
-        }
-
-    );
-
-}
-/* ==========================================================
-   VOICE
-========================================================== */
-
-function initializeVoice(){
-
-    if(!voiceButton) return;
-
-    voiceButton.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            const Recognition=
-
-            window.SpeechRecognition ||
-
-            window.webkitSpeechRecognition;
-
-            if(!Recognition){
-
-                alert(
-
-                    "Speech Recognition is unavailable."
-
-                );
-
-                return;
-
-            }
-
-            const recognition=
-
-            new Recognition();
-
-            recognition.lang="en-IN";
-
-            recognition.start();
-
-            voiceButton.textContent=
-
-            "Listening...";
-
-            recognition.onresult=
-
-            event=>{
-
-                document.getElementById(
-
-                    "description"
-
-                ).value=
-
-                event.results[0][0].transcript;
-
-            };
-
-            recognition.onend=
-
-            ()=>{
-
-                voiceButton.innerHTML=
-
-                "🎤 Voice";
-
-            };
-
-        }
-
-    );
-
-}
-/* ==========================================================
-   SUBMIT
-========================================================== */
-
-function initializeForm(){
-
-    if(!reportForm) return;
-
-    reportForm.addEventListener(
-
-        "submit",
-
-        event=>{
-
-            event.preventDefault();
-
-            simulateAI();
-
-        }
-
-    );
-
-}
-
-function simulateAI(){
-
-    analysisContainer.innerHTML=
-
-    `
-
-    <div class="scanner">
-
-    </div>
-
-    <h2>
-
-        AI Processing...
-
-    </h2>
-
-    <p>
-
-        Understanding image...
-
-    </p>
-
-    `;
-
-    setTimeout(
-
-        showPipeline,
-
-        1500
-
-    );
-
-}
-/* ==========================================================
-   PIPELINE
-========================================================== */
-
-function showPipeline(){
-
-    analysisContainer.innerHTML=
-
-    `
-
-    <div class="analysis-result">
-
-        <h2>
-
-            AI Pipeline Started
-
-        </h2>
-
-        <ul>
-
-            <li>
-
-                ✔ Image received
-
-            </li>
-
-            <li>
-
-                ✔ AI Vision started
-
-            </li>
-
-            <li>
-
-                ✔ Understanding complaint
-
-            </li>
-
-            <li>
-
-                ✔ Detecting severity
-
-            </li>
-
-            <li>
-
-                ✔ Preparing Mission Control
-
-            </li>
-
-        </ul>
-
-    </div>
-
-    `;
-
-}
-/* ==========================================================
-   AI RESULT (Backend Ready)
-========================================================== */
-
-const AI_RESULT = {
-
-    issue: "Pothole",
-
-    confidence: 98,
-
-    severity: "High",
-
-    department: "Road Department",
-
-    priority: "Critical",
-
-    estimatedTime: "24 Hours",
-
-    explanation:
-
-        "Deep pothole detected on the road surface. High priority because it can cause accidents and vehicle damage."
-
-};
 /* ==========================================================
    AI SCAN
 ========================================================== */
@@ -574,69 +331,89 @@ function startAIScan(){
 
     const steps = [
 
-        "Uploading image...",
+        "Uploading Image...",
 
-        "Enhancing image...",
+        "Enhancing Resolution...",
 
         "Running AI Vision...",
 
-        "Detecting civic issue...",
+        "Detecting Infrastructure...",
 
-        "Generating result..."
+        "Generating AI Result..."
 
     ];
 
     let current = 0;
 
-    analysisContainer.innerHTML = `
+    analysisContainer.innerHTML =
 
-        <div class="waiting-ai">
+    `
 
-            <div class="ai-brain">
+    <div class="waiting-ai">
 
-                🤖
+        <div class="ai-brain">
 
-            </div>
-
-            <h3 id="ai-status">
-
-                ${steps[0]}
-
-            </h3>
-
-            <p>
-
-                CivicAI Vision Engine
-
-            </p>
+            🤖
 
         </div>
 
+        <h3 id="ai-status">
+
+            ${steps[0]}
+
+        </h3>
+
+        <p>
+
+            CivicAI Vision Engine
+
+        </p>
+
+    </div>
+
     `;
 
-    const interval = setInterval(()=>{
+    const interval =
 
-        current++;
+        setInterval(
 
-        if(current >= steps.length){
+            ()=>{
 
-            clearInterval(interval);
+                current++;
 
-            renderDetection();
+                if(
 
-            return;
+                    current >=
 
-        }
+                    steps.length
 
-        document.getElementById(
+                ){
 
-            "ai-status"
+                    clearInterval(
 
-        ).textContent =
+                        interval
 
-            steps[current];
+                    );
 
-    },900);
+                    renderDetection();
+
+                    return;
+
+                }
+
+                document.getElementById(
+
+                    "ai-status"
+
+                ).textContent =
+
+                    steps[current];
+
+            },
+
+            900
+
+        );
 
 }
 /* ==========================================================
@@ -655,22 +432,23 @@ function renderDetection(){
 
     if(overlay){
 
-        overlay.innerHTML = `
+        overlay.innerHTML =
 
-            <div
+        `
 
-                class="ai-box"
+        <div
 
-                style="left:22%;top:42%;width:42%;height:30%;">
+            class="ai-box"
 
-                <span>
+            style="left:22%;top:42%;width:42%;height:30%;">
 
-                    ${AI_RESULT.issue}
+            <span>
 
+                ${AI_RESULT.issue}
 
-                </span>
+            </span>
 
-            </div>
+        </div>
 
         `;
 
@@ -680,154 +458,162 @@ function renderDetection(){
 
 }
 /* ==========================================================
-   RESULT
+   AI RESULT
 ========================================================== */
 
 function renderAIResult(){
 
-    analysisContainer.innerHTML = `
+    analysisContainer.innerHTML =
 
-        <div class="analysis-result-card">
+    `
 
-            <div class="success-icon">
+    <div class="analysis-result-card">
 
-                ✓
+        <div class="success-icon">
 
-            </div>
-
-            <h2>
-
-                AI Detection Complete
-
-            </h2>
-
-            <div class="analysis-grid">
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Issue
-
-                    </span>
-
-                    <strong>
-
-                        ${AI_RESULT.issue}
-
-                    </strong>
-
-                </div>
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Confidence
-
-                    </span>
-
-                    <strong id="confidence">
-
-                        0%
-
-                    </strong>
-
-                </div>
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Severity
-
-                    </span>
-
-                    <strong>
-
-                        ${AI_RESULT.severity}
-
-                    </strong>
-
-                </div>
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Department
-
-                    </span>
-
-                    <strong>
-
-                        ${AI_RESULT.department}
-
-                    </strong>
-
-                </div>
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Priority
-
-                    </span>
-
-                    <strong>
-
-                        ${AI_RESULT.priority}
-
-                    </strong>
-
-                </div>
-
-                <div class="analysis-item">
-
-                    <span>
-
-                        Estimated Resolution
-
-                    </span>
-
-                    <strong>
-
-                        ${AI_RESULT.estimatedTime}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-            <div class="ai-explanation">
-
-                <h3>
-
-                    🤖 AI Explanation
-
-                </h3>
-
-                <p>
-
-                    ${AI_RESULT.explanation}
-
-                </p>
-
-            </div>
-
-            <button
-
-                class="primary-btn"
-
-                id="submit-complaint">
-
-                🚀 Submit Complaint
-
-            </button>
+            ✓
 
         </div>
+
+        <h2>
+
+            AI Detection Complete
+
+        </h2>
+
+        <p class="analysis-subtitle">
+
+            CivicAI Vision has successfully analysed the uploaded complaint.
+
+        </p>
+
+        <div class="analysis-grid">
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Issue
+
+                </span>
+
+                <strong>
+
+                    ${AI_RESULT.issue}
+
+                </strong>
+
+            </div>
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Confidence
+
+                </span>
+
+                <strong id="confidence">
+
+                    0%
+
+                </strong>
+
+            </div>
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Severity
+
+                </span>
+
+                <strong>
+
+                    ${AI_RESULT.severity}
+
+                </strong>
+
+            </div>
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Department
+
+                </span>
+
+                <strong>
+
+                    ${AI_RESULT.department}
+
+                </strong>
+
+            </div>
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Priority
+
+                </span>
+
+                <strong>
+
+                    ${AI_RESULT.priority}
+
+                </strong>
+
+            </div>
+
+            <div class="analysis-item">
+
+                <span>
+
+                    Resolution ETA
+
+                </span>
+
+                <strong>
+
+                    ${AI_RESULT.estimatedTime}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="ai-explanation">
+
+            <h3>
+
+                🤖 AI Explanation
+
+            </h3>
+
+            <p>
+
+                ${AI_RESULT.explanation}
+
+            </p>
+
+        </div>
+
+        <button
+
+            id="submit-complaint"
+
+            class="primary-btn">
+
+            Submit Complaint
+
+        </button>
+
+    </div>
 
     `;
 
@@ -837,9 +623,10 @@ function renderAIResult(){
 /* ==========================================================
    CONFIDENCE
 ========================================================== */
+
 function animateConfidence(){
 
-    const element =
+    const confidence =
 
         document.getElementById(
 
@@ -847,35 +634,53 @@ function animateConfidence(){
 
         );
 
-    if(!element) return;
+    if(!confidence){
+
+        return;
+
+    }
 
     let value = 0;
 
-    const target =
+    const timer =
 
-        AI_RESULT.confidence;
+        setInterval(
 
-    const timer = setInterval(()=>{
+            ()=>{
 
-        value++;
+                value++;
 
-        element.textContent =
+                confidence.innerHTML =
 
-            value + "%";
+                    value + "%";
 
-        if(value >= target){
+                if(
 
-            clearInterval(timer);
+                    value >=
 
-            enableSubmitButton();
+                    AI_RESULT.confidence
 
-        }
+                ){
 
-    },20);
+                    clearInterval(
+
+                        timer
+
+                    );
+
+                    enableSubmitButton();
+
+                }
+
+            },
+
+            20
+
+        );
 
 }
 /* ==========================================================
-   SUBMIT COMPLAINT
+   SUBMIT BUTTON
 ========================================================== */
 
 function enableSubmitButton(){
@@ -888,38 +693,178 @@ function enableSubmitButton(){
 
         );
 
-    if(!button) return;
+    if(!button){
+
+        return;
+
+    }
 
     button.addEventListener(
 
         "click",
 
-        ()=>{
-
-            button.innerHTML =
-
-            "✅ Complaint Submitted";
-
-            button.disabled = true;
-
-            button.style.opacity = ".7";
-
-            /*
-                NEXT STEP
-
-                This is where we'll:
-
-                1. Send data to backend
-
-                2. Add complaint to map
-
-                3. Open Mission Control
-
-                4. Update Officer Dashboard
-            */
-
-        }
+        submitComplaint
 
     );
+
+}
+/* ==========================================================
+   SUBMIT
+========================================================== */
+
+function submitComplaint(){
+
+    const button =
+
+        document.getElementById(
+
+            "submit-complaint"
+
+        );
+
+    button.disabled = true;
+
+    button.innerHTML =
+
+        "Submitting...";
+
+    analysisContainer.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+        <div class="submission-status">
+
+            <h3>
+
+                🚀 Sending Complaint
+
+            </h3>
+
+            <p id="submission-step">
+
+                Preparing data...
+
+            </p>
+
+        </div>
+
+        `
+
+    );
+
+    const steps = [
+
+        "Preparing data...",
+
+        "Uploading image...",
+
+        "Saving complaint...",
+
+        "Updating Smart City Map...",
+
+        "Notifying Officer Dashboard...",
+
+        "Complaint Submitted Successfully."
+
+    ];
+
+    let current = 0;
+
+    const text =
+
+        document.getElementById(
+
+            "submission-step"
+
+        );
+
+    const timer =
+
+        setInterval(
+
+            ()=>{
+
+                text.innerHTML =
+
+                    steps[current];
+
+                current++;
+
+                if(
+
+                    current >=
+
+                    steps.length
+
+                ){
+
+                    clearInterval(
+
+                        timer
+
+                    );
+
+                    complaintSuccess();
+
+                }
+
+            },
+
+            900
+
+        );
+
+}
+/* ==========================================================
+   SUCCESS
+========================================================== */
+
+function complaintSuccess(){
+
+    const button =
+
+        document.getElementById(
+
+            "submit-complaint"
+
+        );
+
+    button.innerHTML =
+
+        "✅ Complaint Registered";
+
+    button.style.opacity =
+
+        ".75";
+
+    button.disabled = true;
+
+    /*
+    =============================================
+
+    NEXT MODULES
+
+    CivicEvents.emit(
+
+        "complaint_created",
+
+        AI_RESULT
+
+    );
+
+    This will notify
+
+    ✔ Live City Map
+
+    ✔ Mission Control
+
+    ✔ Officer Dashboard
+
+    ✔ Admin Dashboard
+
+    =============================================
+    */
 
 }
