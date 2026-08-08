@@ -7,18 +7,18 @@
         <p id="auth-copy">Sign in to continue to your secure civic workspace.</p>
 
         <form id="sign-in-form" class="auth-form">
-            <label>Email<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>
-            <label>Password<input type="password" name="password" autocomplete="current-password" required placeholder="Your password"></label>
-            <button class="primary-btn" type="submit">Sign In</button>
+            <label><span data-i18n="email">Email</span><input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>
+            <label><span data-i18n="password">Password</span><input type="password" name="password" autocomplete="current-password" required placeholder="Your password"></label>
+            <button class="primary-btn" type="submit" data-i18n="signIn">Sign In</button>
             <button class="auth-text-button" type="button" data-show-signup>Create a citizen account</button>
         </form>
 
         <form id="sign-up-form" class="auth-form" hidden>
-            <label>Full name<input type="text" name="name" autocomplete="name" required placeholder="Your name"></label>
-            <label>Email<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>
-            <label>Password<input type="password" name="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></label>
+            <label><span data-i18n="fullName">Full name</span><input type="text" name="name" autocomplete="name" required placeholder="Your name"></label>
+            <label><span data-i18n="email">Email</span><input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>
+            <label><span data-i18n="password">Password</span><input type="password" name="password" autocomplete="new-password" minlength="6" required placeholder="At least 6 characters"></label>
             <p class="auth-form-note">New accounts are created as Citizen accounts. Authority access is controlled separately.</p>
-            <button class="primary-btn" type="submit">Create Account</button>
+            <button class="primary-btn" type="submit" data-i18n="createAccount">Create Account</button>
             <button class="auth-text-button" type="button" data-show-signin>Already have an account? Sign in</button>
         </form>
 

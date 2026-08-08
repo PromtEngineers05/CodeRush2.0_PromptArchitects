@@ -216,6 +216,7 @@ function initializeApplication() {
         "initializePlatformCards",
         "initializePlatformReveal",
         "initializeDashboard",
+        "initializeI18n",
         "initializeRoleDashboards",
         "initializeAuth",
         "initializeMap",

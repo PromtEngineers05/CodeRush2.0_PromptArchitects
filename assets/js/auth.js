@@ -33,7 +33,8 @@ function handleSignIn(event) {
     event.preventDefault();
     const form = event.currentTarget;
     try {
-        const session = CivicAuthStore.signIn({ email: form.email.value, password: form.password.value });
+        const data = new FormData(form);
+        const session = CivicAuthStore.signIn({ email: data.get("email"), password: data.get("password") });
         finishAuthentication(session);
     } catch (error) { showAuthError(error.message); }
 }
@@ -42,7 +43,8 @@ function handleSignUp(event) {
     event.preventDefault();
     const form = event.currentTarget;
     try {
-        const session = CivicAuthStore.signUp({ name: form.name.value, email: form.email.value, password: form.password.value });
+        const data = new FormData(form);
+        const session = CivicAuthStore.signUp({ name: data.get("name"), email: data.get("email"), password: data.get("password") });
         finishAuthentication(session);
     } catch (error) { showAuthError(error.message); }
 }

@@ -65,7 +65,7 @@ function initializeReport() {
         recognition.start();
     });
 
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", async event => {
         event.preventDefault();
         const session = CivicComplaintStore.getSession();
         if (!session || session.role !== "citizen") {
@@ -80,19 +80,38 @@ function initializeReport() {
         submitButton.disabled = true;
         submitButton.textContent = "Submitting complaint…";
         analysis.innerHTML = `<div class="submission-progress"><span class="analysis-orb"></span><h3>Creating your complaint</h3><p>AI is attaching the detection, severity and department route.</p></div>`;
-        setTimeout(() => {
+        window.CivicAIVision?.showAssessmentLoading();
+        const outcome = await window.CivicAIAssessment?.assess({
+            visualEvidence: demoResult,
+            complaint: { title, description, location: location.value || "Location pending" }
+        }) || { assessment: { detectedIssue: demoResult.issue, category: demoResult.category, confidence: demoResult.confidence, severity: demoResult.severity, priority: demoResult.priority.split(" ")[0], department: demoResult.department, explanation: "Local visual-analysis evidence matched this civic issue category.", recommendedAction: "Schedule an on-site inspection and keep the citizen updated." }, source: "Local fallback" };
+        const assessment = outcome.assessment;
+        const resolvedResult = {
+            issue: assessment.detectedIssue,
+            category: assessment.category,
+            confidence: assessment.confidence,
+            severity: assessment.severity,
+            department: assessment.department,
+            priority: assessment.priority,
+            explanation: assessment.explanation,
+            recommendedAction: assessment.recommendedAction
+        };
+        window.CivicAIVision?.renderAssessment(assessment, outcome.source);
+        try {
             const complaint = CivicComplaintStore.create({
                 id: complaintId,
                 citizenId: session.userId,
                 citizenName: session.name,
                 title,
                 description,
-                category: demoResult.category || demoResult.issue,
-                issue: demoResult.issue,
-                confidence: demoResult.confidence,
-                severity: demoResult.severity,
-                department: demoResult.department,
-                priority: demoResult.priority.split(" ")[0],
+                category: resolvedResult.category,
+                issue: resolvedResult.issue,
+                confidence: resolvedResult.confidence,
+                severity: resolvedResult.severity,
+                department: resolvedResult.department,
+                priority: resolvedResult.priority,
+                aiSource: outcome.source,
+                aiAnalysis: { explanation: resolvedResult.explanation, recommendedAction: resolvedResult.recommendedAction },
                 status: "AI verified · awaiting assignment",
                 location: location.value || "Location pending",
                 eta: "Within 24 hours",
@@ -100,12 +119,16 @@ function initializeReport() {
             });
             submitButton.disabled = false;
             submitButton.textContent = "Analyze with AI →";
-            showTracking(analysis, { complaintId, title, description, location: complaint.location, result: demoResult });
+            showTracking(analysis, { complaintId, title, description, location: complaint.location, result: resolvedResult });
             CivicUtils?.toast?.(`Complaint ${complaintId} submitted successfully`, "success");
             window.CivicAIMap?.addComplaint({ title, description, latitude: 19.076, longitude: 72.8777 });
-            window.CivicAIMissionControl?.runComplaintWorkflow({ title, complaintId, result: demoResult });
+            window.CivicAIMissionControl?.runComplaintWorkflow({ title, complaintId, result: resolvedResult });
             window.CivicRoleDashboards?.refresh();
-        }, 1400);
+        } catch (error) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Analyze with AI →";
+            CivicUtils?.toast?.("Unable to save complaint. Please try again.", "error");
+        }
     });
 }
 

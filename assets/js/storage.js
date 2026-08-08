@@ -20,10 +20,13 @@ const CivicComplaintStore = {
     getAll,
     create,
     updateStatus,
+    findLikelyDuplicate,
     getSession,
     setSession,
     clearSession
 };
+
+const CivicNotificationStore = { getFor, create };
 
 const CivicAuthStore = {
     signUp,
@@ -71,7 +74,13 @@ function load(key, defaultValue = null) {
 
     }
 
-    return JSON.parse(value);
+    try {
+        return JSON.parse(value);
+    } catch (error) {
+        // A stale or manually-edited local value must not prevent login.
+        remove(key);
+        return defaultValue;
+    }
 
 }
 
@@ -109,16 +118,46 @@ function create(complaint) {
     return record;
 }
 
-function updateStatus(id, status) {
+function updateStatus(id, status, actor = null) {
     const updatedAt = new Date().toISOString();
     const complaints = getAll().map(complaint => {
         if (complaint.id !== id) return complaint;
         const timeline = Array.isArray(complaint.timeline) ? complaint.timeline.slice() : [];
-        if (timeline[timeline.length - 1] !== status) timeline.push(status);
+        const latest = timeline[timeline.length - 1];
+        const latestStatus = typeof latest === "string" ? latest : latest?.status;
+        if (latestStatus !== status) {
+            timeline.push({
+                status,
+                label: status,
+                at: updatedAt,
+                actorName: actor?.name || "CivicAI Authority",
+                actorRole: actor?.role || "authority"
+            });
+        }
         return { ...complaint, status, timeline, updatedAt };
     });
     save(CIVIC_COMPLAINTS_KEY, complaints);
     return complaints.find(complaint => complaint.id === id);
+}
+
+function findLikelyDuplicate(candidate, windowDays = 7) {
+    const normalized = value => String(value || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+    const tokens = value => new Set(normalized(value).split(" ").filter(word => word.length > 3));
+    const overlap = (left, right) => {
+        const a = tokens(left); const b = tokens(right);
+        if (!a.size || !b.size) return 0;
+        let matched = 0; a.forEach(word => { if (b.has(word)) matched += 1; });
+        return matched / Math.min(a.size, b.size);
+    };
+    const cutoff = Date.now() - windowDays * 24 * 60 * 60 * 1000;
+    return getAll().find(item => {
+        if (new Date(item.createdAt).getTime() < cutoff) return false;
+        const sameCategory = normalized(item.category || item.issue) === normalized(candidate.category || candidate.issue);
+        const sameDepartment = normalized(item.department) === normalized(candidate.department);
+        const sameLocation = normalized(item.location) && normalized(item.location) === normalized(candidate.location);
+        const similarDescription = overlap(item.description || item.title, candidate.description || candidate.title) >= 0.45;
+        return (sameCategory || sameDepartment) && (sameLocation || similarDescription);
+    }) || null;
 }
 
 function getSession() {
@@ -142,10 +181,13 @@ function clearSession() {
 }
 
 function getUsers() {
-    const users = load(CIVIC_USERS_KEY, null);
-    if (Array.isArray(users)) return users;
-    save(CIVIC_USERS_KEY, [CIVIC_AUTHORITY_ACCOUNT]);
-    return [CIVIC_AUTHORITY_ACCOUNT];
+    const stored = load(CIVIC_USERS_KEY, []);
+    const users = Array.isArray(stored) ? stored.filter(user => user && user.email && user.role) : [];
+    const authorityIndex = users.findIndex(user => user.id === CIVIC_AUTHORITY_ACCOUNT.id || user.email === CIVIC_AUTHORITY_ACCOUNT.email);
+    if (authorityIndex === -1) users.unshift({ ...CIVIC_AUTHORITY_ACCOUNT });
+    else users[authorityIndex] = { ...CIVIC_AUTHORITY_ACCOUNT };
+    if (JSON.stringify(users) !== JSON.stringify(stored)) save(CIVIC_USERS_KEY, users);
+    return users;
 }
 
 function signUp({ name, email, password }) {
@@ -179,6 +221,20 @@ function getAuthorityCredentials() {
     return { email: CIVIC_AUTHORITY_ACCOUNT.email, password: CIVIC_AUTHORITY_ACCOUNT.password };
 }
 
+function getFor(recipient) {
+    const notifications = load("civic_notifications", []);
+    if (!Array.isArray(notifications)) return [];
+    return notifications.filter(item => item.recipientRole === recipient.role && (!item.recipientUserId || item.recipientUserId === recipient.userId));
+}
+
+function create(notification) {
+    const record = { id: `notice-${Date.now()}-${Math.random().toString(16).slice(2)}`, createdAt: new Date().toISOString(), ...notification };
+    const notifications = load("civic_notifications", []);
+    save("civic_notifications", [record, ...(Array.isArray(notifications) ? notifications : [])].slice(0, 60));
+    return record;
+}
+
 window.CivicStorage = CivicStorage;
 window.CivicComplaintStore = CivicComplaintStore;
 window.CivicAuthStore = CivicAuthStore;
+window.CivicNotificationStore = CivicNotificationStore;
