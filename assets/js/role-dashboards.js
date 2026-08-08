@@ -42,6 +42,7 @@ function renderCitizenDashboard() {
                 <div class="role-card-top"><div><span class="role-kicker">Selected report · ${active.id}</span><h3>${escapeHtml(active.title)}</h3></div><span class="status-pill status-${statusClass(active.status)}">${escapeHtml(active.status)}</span></div>
                 <p class="role-location">⌖ ${escapeHtml(active.location)} <span>•</span> ${formatTimestamp(active.createdAt)}</p>
                 <div class="citizen-case-meta"><span>${escapeHtml(active.category || active.issue)}</span><span>${escapeHtml(active.priority)} · ${escapeHtml(active.severity || "Standard")}</span></div>
+                ${renderCitizenUpdate(active)}
                 ${renderTimeline(active)}
                 <div class="citizen-card-footer"><span>Expected update: <strong>${escapeHtml(active.eta || "Within 24 hours")}</strong></span><a class="dashboard-link" href="#report">Report another issue →</a></div>
             </article>
@@ -116,6 +117,7 @@ function bindAuthorityActions(root, item) {
 }
 
 function statusOptions(current) { return ["AI verified · awaiting assignment", "Inspection scheduled", "Assigned to field team", "Work in progress", "Resolved"].map(status => `<option ${status === current ? "selected" : ""}>${status}</option>`).join(""); }
+function renderCitizenUpdate(item) { const hasAuthorityUpdate = Boolean(item.updatedAt); const message = hasAuthorityUpdate ? `${item.department} updated your case to “${item.status}”.` : `AI verified your report and routed it to ${item.department}.`; const time = hasAuthorityUpdate ? formatTimestamp(item.updatedAt) : "Just now"; return `<div class="citizen-update ${hasAuthorityUpdate ? "authority-update" : "ai-update"}"><span class="citizen-update-icon">${hasAuthorityUpdate ? "✓" : "⌁"}</span><span><strong>${hasAuthorityUpdate ? "Latest authority update" : "AI routing update"}</strong><small>${escapeHtml(message)} · ${time}</small></span></div>`; }
 function renderTimeline(item) { const steps = ["Reported", "AI verified", "Officer assignment", "Resolution update"]; const status = item.status.toLowerCase(); const completed = status.includes("resolved") ? 4 : status.includes("progress") ? 3 : status.includes("assigned") || status.includes("inspection") ? 3 : 2; return `<div class="citizen-timeline">${steps.map((step, index) => `<div class="${index < completed ? "complete" : ""}"><i>${index < completed ? "✓" : index + 1}</i><span>${step}</span><small>${index === 0 ? formatTimestamp(item.createdAt) : index === 1 ? item.confidence + "% confidence" : index === 2 ? item.status : "Next update"}</small></div>`).join("")}</div>`; }
 function statusClass(status) { const value = status.toLowerCase(); return value.includes("resolved") ? "resolved" : value.includes("assigned") ? "assigned" : "progress"; }
 function averageConfidence(items) { return items.length ? (items.reduce((total, item) => total + Number(item.confidence || 0), 0) / items.length).toFixed(0) : 0; }
