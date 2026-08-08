@@ -42,6 +42,8 @@
 
     filter:blur(120px);
 
+    pointer-events:none;
+
 }
 
 .report::after{
@@ -73,6 +75,23 @@
     );
 
     filter:blur(120px);
+
+    pointer-events:none;
+
+}
+
+.report .container{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/* The inherited card sheen is decorative; it must not capture form focus. */
+.report-card.card::before{
+
+    pointer-events:none;
 
 }
 
@@ -750,3 +769,9 @@ WAITING
     margin-bottom:25px;
 
 }
+
+.upload-area.dragging{border-color:var(--secondary);background:rgba(0,212,255,.09);transform:scale(1.01)}
+.submission-progress,.tracking-card{padding:32px}.submission-progress{min-height:340px;display:flex;flex-direction:column;justify-content:center}.tracking-card{animation:trackingIn .45s ease-out}
+.tracking-success{display:flex;align-items:center;gap:15px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.08)}.tracking-success>span{display:grid;place-items:center;width:45px;height:45px;border-radius:50%;background:var(--success);color:#04140f;font-size:1.3rem;font-weight:800}.tracking-success p,.tracking-route span,.tracking-note{margin:0;color:var(--text-muted);font-size:.84rem}.tracking-success h3{margin:3px 0 0;letter-spacing:.04em}
+.tracking-route{display:flex;justify-content:space-between;align-items:center;padding:18px 0}.tracking-timeline{display:grid;gap:16px;padding:18px 0}.tracking-timeline>div{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;color:var(--text-muted);font-size:.9rem}.tracking-timeline i{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;font-style:normal;border:1px solid rgba(255,255,255,.18)}.tracking-timeline .done{color:var(--text-light)}.tracking-timeline .done i{color:#03150e;background:var(--success);border-color:var(--success)}.tracking-timeline .current{color:var(--text)}.tracking-timeline .current i{border-color:var(--secondary);color:var(--secondary);box-shadow:0 0 15px rgba(0,212,255,.35)}.tracking-timeline small{color:var(--text-muted);text-align:right;font-size:.74rem}.tracking-note{padding:15px;border-radius:13px;background:rgba(79,124,255,.10)}
+@keyframes trackingIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}

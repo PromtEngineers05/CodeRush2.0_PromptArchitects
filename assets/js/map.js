@@ -37,6 +37,8 @@ let mapLayers = {
 
 function initializeMap(){
 
+    if (!document.getElementById("city-map") || cityMap) return;
+
     if(typeof L === "undefined"){
 
         console.warn(
@@ -126,6 +128,8 @@ function createLayerGroups(){
     mapLayers.safety =
 
     L.layerGroup().addTo(cityMap);
+
+    addDemoMapData();
 
 }
 
@@ -456,4 +460,20 @@ function clearComplaints(){
 
     }
 
+}
+
+function addDemoMapData(){
+    const incidents = [
+        [19.0715, 72.8712, "Water leakage", "Medium"],
+        [19.0832, 72.8835, "Streetlight outage", "Low"]
+    ];
+    incidents.forEach(([latitude, longitude, title, severity]) => {
+        L.circleMarker([latitude, longitude], { radius: 8, color: "#00d084", fillColor: "#00d084", fillOpacity: .9 })
+            .bindPopup(`<strong>${title}</strong><br>${severity} priority · In progress`)
+            .addTo(mapLayers.complaints);
+    });
+    const insights = document.getElementById("map-insights");
+    if (insights) insights.innerHTML = `
+        <div class="insight-card"><p class="insight-title">AI routing active</p><p class="insight-description">New reports are matched to the responsible department and priority queue.</p></div>
+        <div class="insight-card"><p class="insight-title">2 field responses live</p><p class="insight-description">Road and utilities teams are monitoring active civic cases.</p></div>`;
 }

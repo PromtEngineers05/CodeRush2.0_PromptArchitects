@@ -75,6 +75,11 @@ async function loadAllComponents() {
     const components = [
 
         {
+            id: "auth",
+            path: "./components/auth.html"
+        },
+
+        {
             id: "navbar",
             path: "./components/navbar.html"
         },
@@ -90,28 +95,8 @@ async function loadAllComponents() {
         },
 
         {
-            id:"my-complaints",
-            path:"./components/my-complaints.html"
-        },
-
-        {
-            id:"timeline",
-            path:"./components/timeline.html"
-        },
-
-        {
-            id:"notifications",
-            path:"./components/notifications.html"
-        },
-
-        {
-            id:"profile",
-            path:"./components/profile.html"
-        },
-        
-        {
-            id:"complaint-details",
-            path:"./components/complaint-details.html"
+            id: "ai-vision",
+            path: "./components/ai-vision.html"
         },
 
         {
@@ -135,13 +120,18 @@ async function loadAllComponents() {
         },
 
         {
-            id: "map",
-            path: "./components/map.html"
+            id: "citizen-dashboard",
+            path: "./components/citizen-dashboard.html"
         },
 
         {
-            id: "officer-dashboard",
-            path: "./components/officer-dashboard.html"
+            id: "authority-dashboard",
+            path: "./components/authority-dashboard.html"
+        },
+
+        {
+            id: "map",
+            path: "./components/map.html"
         },
 
         {
@@ -211,5 +201,30 @@ function initializeApplication() {
 
     console.log("%cCivicAI Loaded Successfully",
         "color:#4F7CFF;font-size:16px;font-weight:bold;");
+
+    // Components are fetched after DOMContentLoaded. Initialize each feature
+    // here so its controls bind to the newly inserted markup.
+    [
+        "initializeNavbar",
+        "initializeMobileMenu",
+        "initializeSmoothScroll",
+        "initializeScrollSpy",
+        "initializeHero",
+        "initializeFeatureCards",
+        "initializeFeatureReveal",
+        "initializePipeline",
+        "initializePlatformCards",
+        "initializePlatformReveal",
+        "initializeDashboard",
+        "initializeI18n",
+        "initializeRoleDashboards",
+        "initializeAuth",
+        "initializeMap",
+        "initializeReport",
+        "initializeAIVision",
+        "initializeMissionControl"
+    ].forEach(name => {
+        if (typeof window[name] === "function") window[name]();
+    });
 
 }

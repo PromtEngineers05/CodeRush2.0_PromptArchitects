@@ -1,0 +1,186 @@
+/* ==========================================================
+   AI VISION
+========================================================== */
+
+.ai-vision{
+
+    position:relative;
+
+    padding:140px 0;
+
+    overflow:hidden;
+
+}
+
+.vision-layout{
+
+    display:grid;
+
+    grid-template-columns:1.2fr .8fr;
+
+    gap:35px;
+
+    margin-top:70px;
+
+}
+
+.vision-card,
+.analysis-card{
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.04);
+
+    backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.vision-preview{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:620px;
+
+    background:#080d18;
+
+}
+
+#vision-image{
+
+    width:100%;
+
+    height:620px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+#vision-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+}
+
+#vision-scan{
+
+    position:absolute;
+
+    left:0;
+
+    top:-10px;
+
+    width:100%;
+
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #00F5FF,
+        transparent
+    );
+
+    box-shadow:0 0 30px #00F5FF;
+
+    animation:scanVision 2.4s linear infinite;
+
+}
+
+@keyframes scanVision{
+
+    from{
+
+        top:-5px;
+
+    }
+
+    to{
+
+        top:100%;
+
+    }
+
+}
+
+.ai-detection{
+
+    position:absolute;
+
+    border:3px solid #00FF8C;
+
+    border-radius:10px;
+
+    animation:pulseBox 1.2s infinite;
+
+}
+
+.ai-detection span{
+
+    position:absolute;
+
+    top:-34px;
+
+    left:-3px;
+
+    padding:6px 12px;
+
+    border-radius:8px;
+
+    background:#00FF8C;
+
+    color:#000;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+}
+
+@keyframes pulseBox{
+
+    0%{
+
+        box-shadow:0 0 10px #00FF8C;
+
+    }
+
+    50%{
+
+        box-shadow:0 0 30px #00FF8C;
+
+    }
+
+    100%{
+
+        box-shadow:0 0 10px #00FF8C;
+
+    }
+
+}
+
+#vision-analysis{
+
+    padding:35px;
+
+}
+
+/* Demo states for image-driven Vision analysis */
+.vision-empty-state{min-height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:42px;text-align:center;color:var(--text-muted)}
+.vision-empty-state span,.analysis-orb{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;margin-bottom:18px;border-radius:50%;background:var(--gradient-primary);box-shadow:0 0 36px rgba(0,212,255,.35);color:#fff;font-size:2rem}
+.vision-empty-state strong{color:var(--text);font-size:1.2rem;margin-bottom:10px}.vision-empty-state p,.vision-ready p,.vision-explanation{line-height:1.65;color:var(--text-muted)}
+.vision-ready,.ai-loading{min-height:250px;display:flex;flex-direction:column;justify-content:center}.ai-loading .analysis-orb,.submission-progress .analysis-orb{animation:visionPulse 1.1s infinite alternate}
+.vision-result-heading{display:flex;align-items:center;gap:10px;color:var(--success);font-size:.9rem;font-weight:700;margin-bottom:20px}.result-dot{width:9px;height:9px;border-radius:50%;background:var(--success);box-shadow:0 0 14px var(--success)}
+.ai-source{margin-left:auto;padding:5px 9px;border:1px solid;border-radius:999px;font-size:.68rem;font-weight:800}.ai-source.nvidia{color:#b8f39a;border-color:rgba(118,185,0,.45);background:rgba(118,185,0,.12)}.ai-source.fallback{color:#b9cbff;border-color:rgba(79,124,255,.35);background:rgba(79,124,255,.1)}.vision-action{margin-top:10px;color:var(--text-muted);font-size:.83rem;line-height:1.55}.vision-action strong{color:var(--text-light)}
+.analysis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.analysis-item{padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.035)}.analysis-item span{display:block;color:var(--text-muted);font-size:.78rem;margin-bottom:7px}.analysis-item strong{font-size:.95rem}.vision-explanation{margin:20px 0 0;font-size:.92rem}
+@keyframes visionPulse{to{transform:scale(1.08);box-shadow:0 0 50px rgba(0,212,255,.55)}}
+@media(max-width:900px){.vision-layout{grid-template-columns:1fr;margin-top:45px}.vision-preview,#vision-image,.vision-empty-state{min-height:390px;height:390px}}@media(max-width:480px){.analysis-grid{grid-template-columns:1fr}}

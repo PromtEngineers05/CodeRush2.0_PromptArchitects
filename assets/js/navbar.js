@@ -24,43 +24,23 @@ document.addEventListener(
    ELEMENTS
 ========================================================== */
 
-const navbar =
-
-document.querySelector(
-
-    ".navbar"
-
-);
-
-const navLinks =
-
-document.querySelectorAll(
-
-    '.nav-link'
-
-);
-
-const menuButton =
-
-document.querySelector(
-
-    ".menu-toggle"
-
-);
-
-const mobileMenu =
-
-document.querySelector(
-
-    ".nav-menu"
-
-);
+let navbar;
+let navLinks;
+let menuButton;
+let mobileMenu;
 
 /* ==========================================================
    NAVBAR
 ========================================================== */
 
 function initializeNavbar(){
+
+    navbar = document.querySelector(".navbar");
+    navLinks = document.querySelectorAll(".nav-link");
+    menuButton = document.querySelector(".menu-toggle");
+    mobileMenu = document.querySelector(".nav-links");
+    if (!navbar || navbar.dataset.initialized) return;
+    navbar.dataset.initialized = "true";
 
     window.addEventListener(
 
@@ -100,6 +80,10 @@ function initializeNavbar(){
 ========================================================== */
 
 function initializeSmoothScroll(){
+
+    navLinks = document.querySelectorAll(".nav-link");
+
+    if (!navLinks.length) return;
 
     navLinks.forEach(link=>{
 
@@ -161,6 +145,8 @@ function initializeSmoothScroll(){
 ========================================================== */
 
 function initializeScrollSpy(){
+
+    navLinks = document.querySelectorAll(".nav-link");
 
     const sections=
 
@@ -235,22 +221,10 @@ function initializeScrollSpy(){
    MOBILE MENU
 ========================================================== */
 
-if(menuButton){
-
-    menuButton.addEventListener(
-
-        "click",
-
-        ()=>{
-
-            mobileMenu.classList.toggle(
-
-                "open"
-
-            );
-
-        }
-
-    );
-
+function initializeMobileMenu(){
+    menuButton = document.querySelector(".menu-toggle");
+    mobileMenu = document.querySelector(".nav-links");
+    if (!menuButton || !mobileMenu || menuButton.dataset.initialized) return;
+    menuButton.dataset.initialized = "true";
+    menuButton.addEventListener("click", () => mobileMenu.classList.toggle("open"));
 }

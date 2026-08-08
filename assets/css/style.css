@@ -18,6 +18,7 @@
 
 @import url("./components/buttons.css");
 @import url("./components/cards.css");
+@import url("./components/auth.css");
 
 @import url("./components/navbar.css");
 @import url("./components/loader.css");
@@ -30,6 +31,8 @@
 @import url("./components/notifications.css");
 @import url("./components/profile.css");
 
+@import url("./components/ai-vision.css");
+
 @import url("./components/features.css");
 
 @import url("./components/platform.css");
@@ -38,9 +41,9 @@
 
 @import url("./components/dashboard.css");
 
-@import url("./components/map.css");
+@import url("./components/role-dashboards.css");
 
-@import url("./components/officer-dashboard.css");
+@import url("./components/map.css");
 
 @import url("./components/footer.css");
 @import url("./components/toast.css");
